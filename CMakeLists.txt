@@ -3,4 +3,4 @@ project(project01)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(project01 main.cpp)
+add_executable(project01 main.cpp seller.cpp seller.h buyer.cpp buyer.h admin.cpp admin.h user.cpp user.h data.h)
