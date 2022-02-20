@@ -21,11 +21,11 @@ class User{
   friend istream &operator>>(istream &input, User &user); //Todo:事后删除
 
  private:
-  bool alive;
-  string ID;
+  bool is_alive;
+  string id;
   string name;
   string password;
-  int tel;
+  string tel;
   string address;
   double money;
 };

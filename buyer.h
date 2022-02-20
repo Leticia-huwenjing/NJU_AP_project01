@@ -9,10 +9,10 @@
 class Buyer : public User{
  public:
   void menu(); //买家界面初始化
-  void view_goods(); //买家查看商品列表
-  void search_good(); //买家搜索在售商品
-  void view_orders(User &user); //买家查看自己购买物品的历史订单
-  void buy_good(User &user); //买家购买商品
-  void good_detail(); //查看商品详细信息
+  void view_goods(string command); //买家查看商品列表,该函数解析command
+  void search_good(); //买家搜索在售商品，该函数生成command并传给解析函数
+  void view_orders(string command); //买家查看自己购买物品的历史订单,该函数解析command
+  void buy_good(User &user); //买家购买商品,该函数生成command并传给解析函数
+  void good_detail(); //查看商品详细信息,该函数生成command并传给解析函数
 };
 #endif //PROJECT01__BUYER_H_
