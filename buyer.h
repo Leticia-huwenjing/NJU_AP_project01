@@ -6,7 +6,7 @@
 #define PROJECT01__BUYER_H_
 
 #include "user.h"
-class Buyer : public User{
+class Buyer{
  public:
   void menu(); //买家界面初始化
   void view_goods(string command); //买家查看商品列表,该函数解析command

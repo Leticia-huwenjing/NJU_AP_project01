@@ -11,14 +11,14 @@
 using namespace std;
 class User{
  public:
+  User(string name_,string password_,bool is_alive_=true,string id_="U",string tel_="",string address_="",double money_=0);
   void user_manu();
   void information_manu();
   void change(User &user);
   void see_information(User &user);
   void recharge(User &user);
-  bool log_in();
+  bool log_in(User &user);
   bool register_account();
-  friend istream &operator>>(istream &input, User &user); //Todo:事后删除
 
  private:
   bool is_alive;

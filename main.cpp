@@ -70,7 +70,13 @@ int admin_mod(){ //0正常退出，1登录失败
 }
 
 void register_account(){
-  User user;
+  cout << "请输入用户名：";
+  string test_name;
+  cin >> test_name;
+  cout << "请输入密码：";
+  string test_password;
+  cin >> test_password;
+  User user(test_name, test_password);
   user.register_account();
 }
 
@@ -204,9 +210,14 @@ int person_mod(User &user){
 
 
 int user_module(){ //0正常退出，1登录失败
-  User user;
-  cin >> user; //Todo:更改用户初始化
-  while(user.log_in()){
+  cout << "请输入用户名：";
+  string test_name;
+  cin >> test_name;
+  cout << "请输入密码：";
+  string test_password;
+  cin >> test_password;
+  User user(test_name, test_password);
+  while(user.log_in(user)){
     user.user_manu();
     int opt=0;
     cin >> opt;

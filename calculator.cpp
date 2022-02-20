@@ -3,3 +3,14 @@
 //
 
 #include "calculator.h"
+string calculator(string edited_notation){
+  return "";
+}
+
+string edit(string notation){
+  return "";
+}
+
+string generate(User &user){
+  return "";
+}
