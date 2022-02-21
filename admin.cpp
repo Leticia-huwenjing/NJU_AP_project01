@@ -12,7 +12,32 @@ void Manager::admin_manu() {
 }
 
 bool Manager::log_in() {
-  return false;
+  bool res = false;
+  cout << "请输入管理员姓名：";
+  string test_name;
+  cin >> test_name;
+  cout << "请输入密码：";
+  string test_password;
+  cin >> test_password;
+  if(name == test_name){
+    if(password == test_password){
+      res = true;
+      cout << endl;
+      cout << "-----登录成功-----" << endl;
+      cout << endl;
+    }
+    else{
+      cout << endl;
+      cout << "-----密码错误，登录失败，返回主菜单-----" << endl;
+      cout << endl;
+    }
+  }
+  else{
+    cout << endl;
+    cout << "-----姓名错误，登录失败，返回主菜单-----" << endl;
+    cout << endl;
+  }
+  return res;
 }
 
 void Manager::view_goods(string command) {
