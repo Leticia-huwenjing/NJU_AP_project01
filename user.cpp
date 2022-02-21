@@ -4,7 +4,7 @@
 
 #include "user.h"
 
-User::User(string name_, string password_, bool is_alive_, string id_, string tel_, string address_, double money_) {
+User::User(string& name_, string& password_, bool is_alive_, string id_, string tel_, string address_, string money_) {
   name = name_;
   password = password_;
   is_alive = is_alive_;
@@ -35,7 +35,13 @@ void User::change(User &user) {
 }
 
 void User::see_information(User &user) {
-  ;
+  cout << "*******************" << endl;
+  cout << "用户名：" << user.name << endl;
+  cout << "联系方式：" << user.tel << endl;
+  cout << "地址：" << user.address << endl;
+  cout << "钱包余额：" << user.money << endl;
+  cout << "*******************" << endl;
+  cout << endl;
 }
 
 void User::recharge(User &user) {
@@ -60,16 +66,26 @@ bool User::log_in(User &user) {
     fourth_ = without_tel.find(',');
     string without_address = without_tel.substr(fourth_+1);
     fifth_ = without_address.find(',');
-    string condition = without_address.substr(fifth_+1);
 
-    string this_name;
-    this_name = without_id.erase(first_);
-    string this_password;
-    this_password = without_name.erase(second_);
+    string this_condition = without_address.substr(fifth_+1);
+    string this_name = without_id.erase(first_);
+    string this_password = without_name.erase(second_);
+
     if(this_name == user.name && this_password == user.password){
       res = true;
-      if(condition == "正常"){
+      if(this_condition == "正常"){
         alive = true;
+        string this_id = line.erase(4);
+        string this_tel = without_password.erase(third_);
+        string this_address = without_tel.erase(fourth_);
+        string this_money = without_address.erase(fifth_);
+        user.id = this_id;
+        user.is_alive = true;
+        user.name = this_name;
+        user.password = this_password;
+        user.tel = this_tel;
+        user.address = this_address;
+        user.money = this_money;
       }
       break;
     }
@@ -93,6 +109,49 @@ bool User::log_in(User &user) {
   return res&&alive;
 }
 
-bool User::register_account() {
-  return false;
+void User::register_account(User &user) {
+  bool res = true;
+  ifstream ifs("/Users/huwenjing/project01/user.txt");
+  string line;
+  getline(ifs, line);
+  while(getline(ifs, line) && line.size()>4) {
+    string without_id = line.substr(5); //除去id
+    unsigned long first_;
+    first_ = without_id.find(',');
+    string this_name = without_id.erase(first_);
+
+    if(this_name == user.name){
+      res = false;
+      break;
+    }
+  }
+  ifs.close();
+
+  if(res){ //
+    string last_id = line.erase(4);
+    int cnt = 100*(last_id[1]-'0') + 10*(last_id[2]-'0') + (last_id[3]-'0')+1;
+    string new_ID;
+    stringstream ss;
+    ss << cnt;
+    ss >> new_ID;
+    while(new_ID.size()<3){
+      new_ID = "0"+new_ID;
+    }
+    user.id += new_ID;
+    cout << "****** 创建成功！请补充信息 ******" << endl;
+    cout << "请输入你的联系方式：";
+    cin >> user.tel;
+    cout << "请输入你的地址：";
+    cin >> user.address;
+    user.money = "0.0";
+    user.is_alive = true;
+    cout << "****** 信息补充成功！即将返回主菜单... ******" << endl;
+
+    ofstream ofs("/Users/huwenjing/project01/user.txt", ios::app);
+    ofs << endl << user.id << "," << user.name << "," << user.password << "," << user.tel << "," << user.address << "," << user.money << "," << "正常";
+    ofs.close();
+  }
+  else{
+    cout << "****** 用户名重复，创建失败！即将返回主菜单... ******" << endl;
+  }
 }

@@ -69,7 +69,7 @@ int admin_mod(){ //0正常退出，1登录失败
   return 1;
 }
 
-void register_account(){
+void register_module(){
   cout << "请输入用户名：";
   string test_name;
   cin >> test_name;
@@ -77,7 +77,7 @@ void register_account(){
   string test_password;
   cin >> test_password;
   User user(test_name, test_password);
-  user.register_account();
+  user.register_account(user);
 }
 
 int buyer_mod(Buyer &buyer, User &user){
@@ -217,38 +217,40 @@ int user_module(){ //0正常退出，1登录失败
   string test_password;
   cin >> test_password;
   User user(test_name, test_password);
-  while(user.log_in(user)){
-    user.user_manu();
-    int opt=0;
-    cin >> opt;
-    while(!cin || getchar()!='\n'){
-      cout << "输入不合法!请重新输入：";
-      cin.clear();
-      while(getchar()!='\n');
+  if(user.log_in(user)) {
+    while (true) {
+      user.user_manu();
+      int opt = 0;
       cin >> opt;
-    }
+      while (!cin || getchar() != '\n') {
+        cout << "输入不合法!请重新输入：";
+        cin.clear();
+        while (getchar() != '\n');
+        cin >> opt;
+      }
 
-    switch (opt) {
-      case 1:{
-        Buyer buyer;
-        buyer_mod(buyer, user);
-        break;
-      }
-      case 2:{
-        Seller seller;
-        seller_mod(seller, user);
-        break;
-      }
-      case 3:{
-        person_mod(user);
-        break;
-      }
-      case 4:{
-        return 0;
-      }
-      default: {
-        cout << "请输入1-4之间的整数！" << endl;
-        break;
+      switch (opt) {
+        case 1: {
+          Buyer buyer;
+          buyer_mod(buyer, user);
+          break;
+        }
+        case 2: {
+          Seller seller;
+          seller_mod(seller, user);
+          break;
+        }
+        case 3: {
+          person_mod(user);
+          break;
+        }
+        case 4: {
+          return 0;
+        }
+        default: {
+          cout << "请输入1-4之间的整数！" << endl;
+          break;
+        }
       }
     }
   }
@@ -276,7 +278,7 @@ int main()
         break;
       }
       case 2:{
-        register_account();
+        register_module();
         break;
       }
       case 3:{
