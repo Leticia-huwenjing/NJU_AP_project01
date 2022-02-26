@@ -6,6 +6,7 @@
 #define PROJECT01__SQL_H_
 
 #include <iostream>
+#include "file.h"
 using namespace std;
 void mysql(string instruction);
 void insert(string table_name);

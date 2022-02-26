@@ -8,16 +8,24 @@
 #include "data.h"
 #include <vector>
 #include <fstream>
+
+extern vector<every_user> store_users;
+extern vector<commodity> store_goods;
+extern vector<order> store_orders;
+extern vector<deposit> store_recharge;
+
 using namespace std;
 //读取
-void read(vector<every_user>&store_users, vector<commodity>&store_goods, vector<order>&store_orders);
-void read_users(vector<every_user>&store_users);
-void read_goods(vector<commodity>&store_goods);
-void read_orders(vector<order>&store_orders);
+void read();
+void read_users();
+void read_goods();
+void read_orders();
+void read_recharge();
 
 //写入
-void write_users(vector<every_user>&store_users);
-void write_goods(vector<commodity>&store_goods);
-void write_orders(vector<order>&store_orders);
+void write_users();
+void write_goods();
+void write_orders();
+void write_recharge();
 
 #endif //MAIN_CPP__FILE_H_

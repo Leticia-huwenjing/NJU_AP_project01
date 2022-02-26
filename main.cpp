@@ -10,6 +10,11 @@
 #include "file.h"
 using namespace std;
 
+vector<every_user> store_users;
+vector<commodity> store_goods;
+vector<order> store_orders;
+vector<deposit> store_recharge;
+
 void main_manu(){
   cout << "==========================================" << endl;
   cout << "1.管理员登录 2.用户注册 3.用户登录 4.退出程序" << endl;
@@ -261,10 +266,7 @@ int user_module(){ //0正常退出，1登录失败
 
 int main()
 {
-  vector<every_user> store_users;
-  vector<commodity> store_goods;
-  vector<order> store_orders;
-  read(store_users,store_goods,store_orders);
+  read();
   int opt=0;
   while (true)
   {

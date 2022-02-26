@@ -39,4 +39,9 @@ struct order{
   string buyer_id;
 };
 
+struct deposit{
+  string user_id;
+  string money;
+};
+
 #endif //PROJECT01__DATA_H_

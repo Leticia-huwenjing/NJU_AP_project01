@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include "file.h"
 using namespace std;
 
 class Manager{

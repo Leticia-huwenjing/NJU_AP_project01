@@ -45,7 +45,21 @@ void User::change(User &user) {
       cout << "请输入修改后的用户名：";
       string new_name;
       cin >> new_name;
-      //判断是否重名
+      int len = store_users.size();
+      bool res = true;
+      for(int i = 0; i < len; i++){
+        if(store_users[i].user_name == new_name){
+          res = false;
+          break;
+        }
+      }
+      if(res){
+        user.name = new_name;
+        cout << "修改成功！" << endl;
+      }
+      else{
+        cout << "存在重名,修改失败！" << endl;
+      }
       break;
     }
     case 2:{
@@ -53,6 +67,7 @@ void User::change(User &user) {
       string new_tel;
       cin >> new_tel;
       user.tel = new_tel;
+      cout << "修改成功！" << endl;
       break;
     }
     case 3: {
@@ -60,6 +75,7 @@ void User::change(User &user) {
       string new_address;
       cin >> new_address;
       user.address = new_address;
+      cout << "修改成功！" << endl;
       break;
     }
     default:{
@@ -67,7 +83,16 @@ void User::change(User &user) {
       break;
     }
   }
-  //将修改后的结果写入文件
+  int length = store_users.size();
+  for(int i = 0; i < length; i++){
+    if(store_users[i].user_id == user.id){
+      store_users[i].user_name = user.name;
+      store_users[i].address = user.address;
+      store_users[i].tel = user.tel;
+      break;
+    }
+  }
+  write_users();
 }
 
 void User::see_information(User &user) {
@@ -81,7 +106,82 @@ void User::see_information(User &user) {
 }
 
 void User::recharge(User &user) {
-  ;
+  cout << "请输入充值金额：";
+  string this_money;
+  cin >> this_money;
+  int len = this_money.size();
+  for(int i = 0; i < len; i++){
+    if(this_money[i] != '.' && !(this_money[i] >= '0' && this_money[i] <= '9')){
+      cout << "输入不合法！" << endl;
+      cin.clear();
+      while(getchar()!='\n');
+      return ;
+    }
+  }
+  if(this_money.find('.') != string::npos){
+    int p = this_money.find(',');
+    if(len-p >= 3){
+      cout << "充值失败！最多只能输入一位小数！" << endl;
+      return ;
+    }
+  }
+  else{
+    this_money.append(".0");
+  }
+
+  string notation1; //充值金额计算
+  notation1.append(this_money);
+  int cnt1 = store_recharge.size();
+  for(int i = 0; i < cnt1; i++){
+    if(store_recharge[i].user_id == user.id){
+      notation1.append("+");
+      notation1.append(store_recharge[i].money);
+    }
+  }
+
+  string notation2; //购买金额计算
+  int cnt2 = store_orders.size();
+  for(int i = 0; i < cnt2; i++){
+    if(store_orders[i].buyer_id == user.id){
+      notation2.append("-");
+      notation2.append(store_orders[i].per_price);
+      notation2.append("*");
+      notation2.append(store_orders[i].amount);
+    }
+  }
+
+  string notation3; //售出金额计算
+  for(int i = 0; i < cnt2; i++){
+    if(store_orders[i].seller_id == user.id){
+      notation2.append("+");
+      notation2.append(store_orders[i].per_price);
+      notation2.append("*");
+      notation2.append(store_orders[i].amount);
+    }
+  }
+
+  string notation; //最后生成的总表达式
+  notation.append(notation1);
+  notation.append(notation2);
+  notation.append(notation3);
+
+  user.money = calculator(notation);
+  int cnt3 = store_users.size();
+  for(int i = 0; i < cnt3; i++){
+    if(store_users[i].user_id == user.id){
+      store_users[i].money = user.money;
+    }
+  }
+  write_users();
+
+  deposit this_recharge;
+  this_recharge.user_id = user.id;
+  this_recharge.money = this_money;
+  store_recharge.push_back(this_recharge);
+  write_recharge();
+
+  cout << "充值成功，当前余额：" << user.money << endl;
+  cout << endl;
 }
 
 bool User::log_in(User &user) {
@@ -163,7 +263,7 @@ void User::register_account(User &user) {
   }
   ifs.close();
 
-  if(res){ //
+  if(res){
     string last_id = line.erase(4);
     int cnt = 100*(last_id[1]-'0') + 10*(last_id[2]-'0') + (last_id[3]-'0')+1;
     string new_ID;
@@ -183,9 +283,18 @@ void User::register_account(User &user) {
     user.is_alive = true;
     cout << "****** 信息补充成功！即将返回主菜单... ******" << endl;
 
-    ofstream ofs("/Users/huwenjing/project01/user.txt", ios::app);
-    ofs << endl << user.id << "," << user.name << "," << user.password << "," << user.tel << "," << user.address << "," << user.money << "," << "正常";
-    ofs.close();
+    every_user this_user;
+    this_user.user_id = user.id;
+    this_user.user_name = user.name;
+    this_user.password = user.password;
+    this_user.tel = user.tel;
+    this_user.address = user.address;
+    this_user.money = user.money;
+    this_user.condition = "正常";
+
+    store_users.push_back(this_user);
+
+    write_users();
   }
   else{
     cout << "****** 用户名重复，创建失败！即将返回主菜单... ******" << endl;

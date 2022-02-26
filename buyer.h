@@ -6,6 +6,7 @@
 #define PROJECT01__BUYER_H_
 
 #include "user.h"
+
 class Buyer{
  public:
   void menu(); //买家界面初始化

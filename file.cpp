@@ -5,13 +5,14 @@
 #include "file.h"
 
 //读取
-void read(vector<every_user>&store_users, vector<commodity>&store_goods, vector<order>&store_orders) {
-  read_users(store_users);
-  read_goods(store_goods);
-  read_orders(store_orders);
+void read() {
+  read_users();
+  read_goods();
+  read_orders();
+  read_recharge();
 }
 
-void read_users(vector<every_user>&store_users){
+void read_users(){
   ifstream ifs("/Users/huwenjing/project01/user.txt");
   string line;
   getline(ifs, line);
@@ -47,7 +48,7 @@ void read_users(vector<every_user>&store_users){
   }
 }
 
-void read_goods(vector<commodity>&store_goods){
+void read_goods(){
   ifstream ifs("/Users/huwenjing/project01/commodity.txt");
   string line;
   getline(ifs, line);
@@ -90,7 +91,7 @@ void read_goods(vector<commodity>&store_goods){
   ifs.close();
 }
 
-void read_orders(vector<order>&store_orders){
+void read_orders(){
   ifstream ifs("/Users/huwenjing/project01/order.txt");
   string line;
   getline(ifs, line);
@@ -129,7 +130,24 @@ void read_orders(vector<order>&store_orders){
   ifs.close();
 }
 
-void write_users(vector<every_user>&store_users){
+void read_recharge(){
+  ifstream ifs("/Users/huwenjing/project01/recharge.txt");
+  string line;
+  getline(ifs, line);
+  while(getline(ifs,line)){
+    string money = line.substr(5);
+    string user_id = line.erase(4);
+
+    deposit this_deposit;
+    this_deposit.user_id = user_id;
+    this_deposit.money = money;
+
+    store_recharge.push_back(this_deposit);
+  }
+  ifs.close();
+}
+
+void write_users(){
   ofstream ofs("/Users/huwenjing/project01/user.txt");
   ofs << "用户ID,用户名,密码,联系方式,地址,钱包余额,用户状态";
   int len = store_users.size();
@@ -142,7 +160,7 @@ void write_users(vector<every_user>&store_users){
   ofs.close();
 }
 
-void write_goods(vector<commodity>&store_goods){
+void write_goods(){
   ofstream ofs("/Users/huwenjing/project01/commodity.txt");
   ofs << "商品ID,名称,价格,数量,描述,卖家ID,上架时间,商品状态";
   int len = store_goods.size();
@@ -154,7 +172,8 @@ void write_goods(vector<commodity>&store_goods){
   }
   ofs.close();
 }
-void write_orders(vector<order>&store_orders){
+
+void write_orders(){
   ofstream ofs("/Users/huwenjing/project01/order.txt");
   ofs << "订单ID,商品ID,交易单价,数量,交易时间,卖家ID,买家ID";
   int len = store_orders.size();
@@ -163,6 +182,17 @@ void write_orders(vector<order>&store_orders){
         << store_orders[i].order_id << "," << store_orders[i].good_id << "," << store_orders[i].per_price << ","
         << store_orders[i].amount << "," << store_orders[i].time << "," << store_orders[i].seller_id << ","
         << store_orders[i].buyer_id;
+  }
+  ofs.close();
+}
+
+void write_recharge(){
+  ofstream ofs("/Users/huwenjing/project01/recharge.txt");
+  ofs << "用户ID,充值金额";
+  int len = store_recharge.size();
+  for(int i = 0; i < len; i++){
+    ofs << endl
+        << store_recharge[i].user_id << "," << store_recharge[i].money;
   }
   ofs.close();
 }

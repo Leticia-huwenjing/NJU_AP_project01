@@ -8,7 +8,12 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include "data.h"
+#include "file.h"
+#include "calculator.h"
 using namespace std;
+
+
 class User{
  public:
   User(string& name_,string& password_,bool is_alive_=true,string id_="U",string tel_="",string address_="",string money_="0.0");
@@ -20,7 +25,7 @@ class User{
   bool log_in(User &user);
   void register_account(User &user);
 
- private:
+ public:
   bool is_alive;
   string id;
   string name;
