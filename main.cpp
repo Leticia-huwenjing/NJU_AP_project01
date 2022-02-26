@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "admin.h"
 #include "buyer.h"
 #include "calculator.h"
@@ -6,6 +7,7 @@
 #include "seller.h"
 #include "sql.h"
 #include "user.h"
+#include "file.h"
 using namespace std;
 
 void main_manu(){
@@ -259,6 +261,10 @@ int user_module(){ //0正常退出，1登录失败
 
 int main()
 {
+  vector<every_user> store_users;
+  vector<commodity> store_goods;
+  vector<order> store_orders;
+  read(store_users,store_goods,store_orders);
   int opt=0;
   while (true)
   {

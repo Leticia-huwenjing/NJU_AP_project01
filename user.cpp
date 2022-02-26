@@ -31,7 +31,43 @@ void User::information_manu() {
 }
 
 void User::change(User &user) {
-  ;
+  cout << "情选择修改的属性（1.用户名 2.联系方式 3.地址）：";
+  int opt=0;
+  cin >> opt;
+  while(!cin || getchar()!='\n'){
+    cout << "输入不合法!请重新输入：";
+    cin.clear();
+    while(getchar()!='\n');
+    cin >> opt;
+  }
+  switch (opt) {
+    case 1:{
+      cout << "请输入修改后的用户名：";
+      string new_name;
+      cin >> new_name;
+      //判断是否重名
+      break;
+    }
+    case 2:{
+      cout << "请输入修改后的联系方式：";
+      string new_tel;
+      cin >> new_tel;
+      user.tel = new_tel;
+      break;
+    }
+    case 3: {
+      cout << "请输入修改后的地址：";
+      string new_address;
+      cin >> new_address;
+      user.address = new_address;
+      break;
+    }
+    default:{
+      cout << "请输入1-3之间的整数！" << endl;
+      break;
+    }
+  }
+  //将修改后的结果写入文件
 }
 
 void User::see_information(User &user) {
