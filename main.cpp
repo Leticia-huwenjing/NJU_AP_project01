@@ -1,13 +1,16 @@
 #include <iostream>
 #include <vector>
+#include <string>
+#include <string_view>
+#include <iomanip>
 #include "admin.h"
 #include "buyer.h"
-#include "calculator.h"
 #include "data.h"
 #include "seller.h"
 #include "sql.h"
 #include "user.h"
 #include "file.h"
+#include "utfwidth.h"
 using namespace std;
 
 vector<every_user> store_users;
