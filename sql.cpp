@@ -271,51 +271,91 @@ void update_user_admin(string instruction) {
 
 void select_buyer(string instruction, User& user){
   if(instruction.find("commodity") != string::npos){
-    cout << "*************************************************************************************************************************************" << endl;
-    cout << left << setw_u8(20, "商品ID") << "商品ID"
-         << left << setw_u8(20, "名称")  << "名称"
-         << left << setw_u8(20,"价格") << "价格"
-         << left << setw_u8(20, "上架时间") << "上架时间"
-         << left << setw_u8(20, "卖家ID") << "卖家ID"
-         << left << setw_u8(20, "数量") << "数量" << endl;
+    bool res = false;
     int len  = store_goods.size();
     for(int i = 0; i < len; i++){
-      if(store_goods[i].condition == "销售中") {
-        cout << left << setw_u8(20, store_goods[i].good_id) << store_goods[i].good_id
-             << left << setw_u8(20, store_goods[i].good_name) << store_goods[i].good_name
-             << left << setw_u8(20, store_goods[i].good_price) << store_goods[i].good_price
-             << left << setw_u8(20, store_goods[i].time) << store_goods[i].time
-             << left << setw_u8(20, store_goods[i].seller_id) << store_goods[i].seller_id
-             << left << setw_u8(20, store_goods[i].stock) << store_goods[i].stock << endl;
+      if(store_goods[i].condition == "销售中"){
+        res = true;
+        break;
       }
     }
-    cout << "*************************************************************************************************************************************" << endl;
-    cout << endl;
+
+    if(res) {
+      cout
+          << "*************************************************************************************************************************************"
+          << endl;
+      cout << left << setw_u8(20, "商品ID") << "商品ID"
+           << left << setw_u8(20, "名称") << "名称"
+           << left << setw_u8(20, "价格") << "价格"
+           << left << setw_u8(20, "上架时间") << "上架时间"
+           << left << setw_u8(20, "卖家ID") << "卖家ID"
+           << left << setw_u8(20, "数量") << "数量" << endl;
+
+      for (int i = 0; i < len; i++) {
+        if (store_goods[i].condition == "销售中") {
+          cout << left << setw_u8(20, store_goods[i].good_id) << store_goods[i].good_id
+               << left << setw_u8(20, store_goods[i].good_name) << store_goods[i].good_name
+               << left << setw_u8(20, store_goods[i].good_price) << store_goods[i].good_price
+               << left << setw_u8(20, store_goods[i].time) << store_goods[i].time
+               << left << setw_u8(20, store_goods[i].seller_id) << store_goods[i].seller_id
+               << left << setw_u8(20, store_goods[i].stock) << store_goods[i].stock << endl;
+        }
+      }
+      cout
+          << "*************************************************************************************************************************************"
+          << endl;
+      cout << endl;
+    }
+    else{
+      cout << "********************************************" << endl;
+      cout << "当前没有销售中商品哦！您可以切换为卖家模式发布商品！" << endl;
+      cout << "********************************************" << endl;
+    }
     ofstream ofs("/Users/huwenjing/project01/commands.txt",ios::app);
     ofs << sql_date() << instruction << endl;
     ofs.close();
   }
   else{ //order
-    cout << "*************************************************************************************************************************************" << endl;
-    cout << left << setw_u8(20, "订单ID") << "订单ID"
-         << left << setw_u8(20, "商品ID")  << "商品ID"
-         << left << setw_u8(20,"交易单价") << "交易单价"
-         << left << setw_u8(20, "数量") << "数量"
-         << left << setw_u8(20, "交易时间") << "交易时间"
-         << left << setw_u8(20, "卖家ID") << "卖家ID" << endl;
     int len = store_orders.size();
+    bool res = false;
     for(int i = 0; i < len; i++){
-      if(store_orders[i].buyer_id == user.id) {
-        cout << left << setw_u8(20, store_orders[i].order_id) << store_orders[i].order_id
-             << left << setw_u8(20, store_orders[i].good_id) << store_orders[i].good_id
-             << left << setw_u8(20, store_orders[i].per_price) << store_orders[i].per_price
-             << left << setw_u8(20, store_orders[i].amount) << store_orders[i].amount
-             << left << setw_u8(20, store_orders[i].time) << store_orders[i].time
-             << left << setw_u8(20, store_orders[i].seller_id) << store_orders[i].seller_id << endl;
+      if(store_orders[i].buyer_id == user.id){
+        res = true;
+        break;
       }
     }
-    cout << "*************************************************************************************************************************************" << endl;
-    cout << endl;
+
+    if(res) {
+      cout
+          << "*************************************************************************************************************************************"
+          << endl;
+      cout << left << setw_u8(20, "订单ID") << "订单ID"
+           << left << setw_u8(20, "商品ID") << "商品ID"
+           << left << setw_u8(20, "交易单价") << "交易单价"
+           << left << setw_u8(20, "数量") << "数量"
+           << left << setw_u8(20, "交易时间") << "交易时间"
+           << left << setw_u8(20, "卖家ID") << "卖家ID" << endl;
+
+      for (int i = 0; i < len; i++) {
+        if (store_orders[i].buyer_id == user.id) {
+          cout << left << setw_u8(20, store_orders[i].order_id) << store_orders[i].order_id
+               << left << setw_u8(20, store_orders[i].good_id) << store_orders[i].good_id
+               << left << setw_u8(20, store_orders[i].per_price) << store_orders[i].per_price
+               << left << setw_u8(20, store_orders[i].amount) << store_orders[i].amount
+               << left << setw_u8(20, store_orders[i].time) << store_orders[i].time
+               << left << setw_u8(20, store_orders[i].seller_id) << store_orders[i].seller_id << endl;
+        }
+      }
+      cout
+          << "*************************************************************************************************************************************"
+          << endl;
+      cout << endl;
+    }
+    else{
+      cout << "********************************" << endl;
+      cout << "您还没有订单哦！快去购买一些商品吧！" << endl;
+      cout << "********************************" << endl;
+    }
     ofstream ofs("/Users/huwenjing/project01/commands.txt",ios::app);
     ofs << sql_date() << instruction << endl;
     ofs.close();
@@ -329,33 +369,48 @@ void search_buyer(string instruction) {
 
     int len  = store_goods.size();
     bool res = false;
+    bool is_alive = false;
     for(int i = 0; i < len; i++){
       if(store_goods[i].good_name.find(this_name) != string::npos){
         res = true;
-        break;
-      }
-    }
-    if(res){
-      cout << "*************************************************************************************************************************************" << endl;
-      cout << left << setw_u8(20, "商品ID") << "商品ID"
-           << left << setw_u8(20, "名称")  << "名称"
-           << left << setw_u8(20,"价格") << "价格"
-           << left << setw_u8(20, "上架时间") << "上架时间"
-           << left << setw_u8(20, "卖家ID") << "卖家ID"
-           << left << setw_u8(20, "数量") << "数量" << endl;
-      int len  = store_goods.size();
-      for(int i = 0; i < len; i++){
-        if(store_goods[i].condition == "销售中") {
-          cout << left << setw_u8(20, store_goods[i].good_id) << store_goods[i].good_id
-               << left << setw_u8(20, store_goods[i].good_name) << store_goods[i].good_name
-               << left << setw_u8(20, store_goods[i].good_price) << store_goods[i].good_price
-               << left << setw_u8(20, store_goods[i].time) << store_goods[i].time
-               << left << setw_u8(20, store_goods[i].seller_id) << store_goods[i].seller_id
-               << left << setw_u8(20, store_goods[i].stock) << store_goods[i].stock << endl;
+        if(store_goods[i].condition == "销售中"){
+          is_alive = true;
+          break;
         }
       }
-      cout << "*************************************************************************************************************************************" << endl;
-      cout << endl;
+    }
+
+    if(res){
+      if(is_alive) {
+        cout
+            << "*************************************************************************************************************************************"
+            << endl;
+        cout << left << setw_u8(20, "商品ID") << "商品ID"
+             << left << setw_u8(20, "名称") << "名称"
+             << left << setw_u8(20, "价格") << "价格"
+             << left << setw_u8(20, "上架时间") << "上架时间"
+             << left << setw_u8(20, "卖家ID") << "卖家ID"
+             << left << setw_u8(20, "数量") << "数量" << endl;
+        for (int i = 0; i < len; i++) {
+          if (store_goods[i].condition == "销售中") {
+            cout << left << setw_u8(20, store_goods[i].good_id) << store_goods[i].good_id
+                 << left << setw_u8(20, store_goods[i].good_name) << store_goods[i].good_name
+                 << left << setw_u8(20, store_goods[i].good_price) << store_goods[i].good_price
+                 << left << setw_u8(20, store_goods[i].time) << store_goods[i].time
+                 << left << setw_u8(20, store_goods[i].seller_id) << store_goods[i].seller_id
+                 << left << setw_u8(20, store_goods[i].stock) << store_goods[i].stock << endl;
+          }
+        }
+        cout
+            << "*************************************************************************************************************************************"
+            << endl;
+        cout << endl;
+      }
+      else{
+        cout << "******************************" << endl;
+        cout << "您想要的商品已下架！返回初始界面" << endl;
+        cout << "******************************" << endl;
+      }
     }
     else{
       cout << "******************************" << endl;
@@ -369,15 +424,20 @@ void search_buyer(string instruction) {
 
     int len  = store_goods.size();
     bool res = false;
+    bool is_alive = false;
     int i;
     for(i = 0; i < len; i++){
       if(store_goods[i].good_id == this_good_id){
         res = true;
+        if(store_goods[i].condition == "销售中"){
+          is_alive = true;
+        }
         break;
       }
     }
+
     if(res){
-      if(store_goods[i].condition == "销售中") {
+      if(is_alive) {
         cout << "*********************************" << endl;
         cout << "商品ID：" << store_goods[i].good_id << endl;
         cout << "商品名称：" << store_goods[i].good_name << endl;
@@ -388,15 +448,15 @@ void search_buyer(string instruction) {
         cout << "*********************************" << endl;
       }
       else{
-        cout << "******************************" << endl;
+        cout << "****************************" << endl;
         cout << "该商品不在销售中！返回初始界面" << endl;
-        cout << "******************************" << endl;
+        cout << "****************************" << endl;
       }
     }
     else{
-      cout << "******************************" << endl;
+      cout << "************************" << endl;
       cout << "不存在该商品！返回初始界面" << endl;
-      cout << "******************************" << endl;
+      cout << "************************" << endl;
     }
   }
   ofstream ofs("/Users/huwenjing/project01/commands.txt",ios::app);
@@ -414,51 +474,91 @@ void update_buyer(string instruction, User& user){
 
 void select_seller(string instruction, User& user) {
   if(instruction.find("commodity") != string::npos){
-    cout << "*************************************************************************************************************************************" << endl;
-    cout << left << setw_u8(20, "商品ID") << "商品ID"
-         << left << setw_u8(20, "名称")  << "名称"
-         << left << setw_u8(20,"价格") << "价格"
-         << left << setw_u8(20, "数量") << "数量"
-         << left << setw_u8(20, "上架时间") << "上架时间"
-         << left << setw_u8(20, "商品状态") << "商品状态" << endl;
     int len  = store_goods.size();
-    for(int i = 0; i < len; i++){
-      if(store_goods[i].seller_id == user.id) {
-        cout << left << setw_u8(20, store_goods[i].good_id) << store_goods[i].good_id
-             << left << setw_u8(20, store_goods[i].good_name) << store_goods[i].good_name
-             << left << setw_u8(20, store_goods[i].good_price) << store_goods[i].good_price
-             << left << setw_u8(20, store_goods[i].stock) << store_goods[i].stock
-             << left << setw_u8(20, store_goods[i].time) << store_goods[i].time
-             << left << setw_u8(20, store_goods[i].condition) << store_goods[i].condition << endl;
+    bool res = false;
+    for(int i = 0; i < len; i++) {
+      if (store_goods[i].seller_id == user.id) {
+        res = true;
+        break;
       }
     }
-    cout << "*************************************************************************************************************************************" << endl;
-    cout << endl;
+
+    if(res) {
+      cout
+          << "*************************************************************************************************************************************"
+          << endl;
+      cout << left << setw_u8(20, "商品ID") << "商品ID"
+           << left << setw_u8(20, "名称") << "名称"
+           << left << setw_u8(20, "价格") << "价格"
+           << left << setw_u8(20, "数量") << "数量"
+           << left << setw_u8(20, "上架时间") << "上架时间"
+           << left << setw_u8(20, "商品状态") << "商品状态" << endl;
+
+      for (int i = 0; i < len; i++) {
+        if (store_goods[i].seller_id == user.id) {
+          cout << left << setw_u8(20, store_goods[i].good_id) << store_goods[i].good_id
+               << left << setw_u8(20, store_goods[i].good_name) << store_goods[i].good_name
+               << left << setw_u8(20, store_goods[i].good_price) << store_goods[i].good_price
+               << left << setw_u8(20, store_goods[i].stock) << store_goods[i].stock
+               << left << setw_u8(20, store_goods[i].time) << store_goods[i].time
+               << left << setw_u8(20, store_goods[i].condition) << store_goods[i].condition << endl;
+        }
+      }
+      cout
+          << "*************************************************************************************************************************************"
+          << endl;
+      cout << endl;
+    }
+    else{
+      cout << "**********************************" << endl;
+      cout << "您还没有发布过商品哦！快去发布商品吧！" << endl;
+      cout << "**********************************" << endl;
+    }
     ofstream ofs("/Users/huwenjing/project01/commands.txt",ios::app);
     ofs << sql_date() << instruction << endl;
     ofs.close();
   }
   else{ //order
-    cout << "*************************************************************************************************************************************" << endl;
-    cout << left << setw_u8(20, "订单ID") << "订单ID"
-         << left << setw_u8(20, "商品ID")  << "商品ID"
-         << left << setw_u8(20,"交易单价") << "交易单价"
-         << left << setw_u8(20, "数量") << "数量"
-         << left << setw_u8(20, "交易时间") << "交易时间"
-         << left << setw_u8(20, "买家ID") << "买家ID" << endl;
     int len = store_orders.size();
+    bool res = false;
     for(int i = 0; i < len; i++){
       if(store_orders[i].seller_id == user.id) {
-        cout << left << setw_u8(20, store_orders[i].order_id) << store_orders[i].order_id
-             << left << setw_u8(20, store_orders[i].good_id) << store_orders[i].good_id
-             << left << setw_u8(20, store_orders[i].per_price) << store_orders[i].per_price
-             << left << setw_u8(20, store_orders[i].amount) << store_orders[i].amount
-             << left << setw_u8(20, store_orders[i].time) << store_orders[i].time
-             << left << setw_u8(20, store_orders[i].buyer_id) << store_orders[i].buyer_id << endl;
+        res = true;
+        break;
       }
     }
-    cout << "*************************************************************************************************************************************" << endl;
-    cout << endl;
+
+    if(res) {
+      cout
+          << "*************************************************************************************************************************************"
+          << endl;
+      cout << left << setw_u8(20, "订单ID") << "订单ID"
+           << left << setw_u8(20, "商品ID") << "商品ID"
+           << left << setw_u8(20, "交易单价") << "交易单价"
+           << left << setw_u8(20, "数量") << "数量"
+           << left << setw_u8(20, "交易时间") << "交易时间"
+           << left << setw_u8(20, "买家ID") << "买家ID" << endl;
+
+      for (int i = 0; i < len; i++) {
+        if (store_orders[i].seller_id == user.id) {
+          cout << left << setw_u8(20, store_orders[i].order_id) << store_orders[i].order_id
+               << left << setw_u8(20, store_orders[i].good_id) << store_orders[i].good_id
+               << left << setw_u8(20, store_orders[i].per_price) << store_orders[i].per_price
+               << left << setw_u8(20, store_orders[i].amount) << store_orders[i].amount
+               << left << setw_u8(20, store_orders[i].time) << store_orders[i].time
+               << left << setw_u8(20, store_orders[i].buyer_id) << store_orders[i].buyer_id << endl;
+        }
+      }
+      cout
+          << "*************************************************************************************************************************************"
+          << endl;
+      cout << endl;
+    }
+    else{
+      cout << "*********************" << endl;
+      cout << "您还没有历史出售订单哦！" << endl;
+      cout << "*********************" << endl;
+    }
     ofstream ofs("/Users/huwenjing/project01/commands.txt",ios::app);
     ofs << sql_date() << instruction << endl;
     ofs.close();

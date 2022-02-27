@@ -28,7 +28,26 @@ void Seller::view_orders(User &user) {
 }
 
 void Seller::sell_good(User &user) {
-  ;
+  string this_good_name;
+  cout << "请输入商品名称：";
+  cin >> this_good_name;
+  string this_good_price;
+  cout << "请输入商品价格：";
+  cin >> this_good_price;
+  string this_good_stock;
+  cout << "请输入商品数量：";
+  cin >> this_good_stock;
+  string this_good_information;
+  cout << "请输入商品描述：";
+  cin >> this_good_information;
+  cout << endl;
+
+  //判断用户输入是否合法
+
+  //Todo:判断价格是否为大于0的一位小数
+
+  //Todo:判断数量是否为大于0的整数
+
 }
 
 void Seller::change_good(User &user) {
