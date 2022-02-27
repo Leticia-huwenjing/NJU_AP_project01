@@ -40,26 +40,56 @@ bool Manager::log_in() {
   return res;
 }
 
-void Manager::view_goods(string command) {
-  ;
+void Manager::view_goods() {
+  string manipulator = "admin";
+  string instruction = "SELECT * FROM commodity";
+  string fake_name = "";
+  string fake_password = "";
+  User user(fake_name,fake_password);
+  mysql(instruction, manipulator, user);
 }
 
-void Manager::view_orders(string command) {
-  ;
+void Manager::view_orders() {
+  string manipulator = "admin";
+  string instruction = "SELECT * FROM order";
+  string fake_name = "";
+  string fake_password = "";
+  User user(fake_name,fake_password);
+  mysql(instruction, manipulator, user);
 }
 
 void Manager::search_goods() {
-  ;
+  string fake_name = "";
+  string fake_password = "";
+  User user(fake_name,fake_password);
+  string manipulator = "admin";
+  string instruction = "SELECT * FROM commodity WHERE 名称 CONTAINS ";
+  cout << "请输入商品名称：";
+  string this_name;
+  cin >> this_name;
+  instruction.append(this_name);
+  mysql(instruction, manipulator, user);
 }
 
 void Manager::remove_good() {
-  ;
+  string fake_name = "";
+  string fake_password = "";
+  User user(fake_name,fake_password);
+  //Todo:管理员下架
 }
 
-void Manager::view_users(string command) {
-  ;
+void Manager::view_users() {
+  string manipulator = "admin";
+  string instruction = "SELECT * FROM user";
+  string fake_name = "";
+  string fake_password = "";
+  User user(fake_name,fake_password);
+  mysql(instruction, manipulator, user);
 }
 
 void Manager::ban_user() {
-  ;
+  string fake_name = "";
+  string fake_password = "";
+  User user(fake_name,fake_password);
+  //Todo:管理员封禁
 }

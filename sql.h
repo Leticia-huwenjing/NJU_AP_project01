@@ -7,14 +7,34 @@
 
 #include <iostream>
 #include "file.h"
+#include "utfwidth.h"
+#include "user.h"
 using namespace std;
-void mysql(string instruction);
-void insert(string table_name);
-void insert_user(string x1, string x2, string x3, string x4, string x5, string x6);
-void insert_good(string x1, string x2, string x3, string x4, string x5, string x6, string x7, string x8);
-void insert_order(string x1, string x2, string x3, string x4, string x5, string x6, string x7);
-void update(string table_name, string column, string value, string edit_column, string edit_value);
-void select_admin(string table, string column, string value);
-void select_buyer(string table, string column, string value);
-void select_all(string user, string table);//buyer,seller,admin
+
+void mysql(string instruction, string& manipulator, User& user);
+void insert(string instruction, string& manipulator, User& user);
+void update(string instruction, string& manipulator, User& user);
+void select(string instruction, string& manipulator, User& user);
+
+//admin
+void select_admin(string instruction);
+void search_admin(string instruction); //select含有WHERE时
+void update_good_admin(string instruction); //下架商品
+void update_user_admin(string instruction); //封禁用户（需要调用下架商品）
+
+//buyer
+void select_buyer(string instruction, User& user);
+void search_buyer(string instruction); //select含有WHERE时，查找商品or查看商品详细信息
+void insert_buyer(string instruction, User& user); //增加订单
+void update_buyer(string instruction, User& user);//购买商品
+
+//seller
+void select_seller(string instruction, User& user); //查看发布商品or查看历史订单
+void insert_seller(string instruction, User& user); //上架商品
+void update_seller(string instruction, User& user); //下架商品or修改商品属性
+
+//计算发布时间
+string date();
+string sql_date();
+
 #endif //PROJECT01__SQL_H_

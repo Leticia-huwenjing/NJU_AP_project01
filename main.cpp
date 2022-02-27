@@ -41,8 +41,7 @@ int admin_mod(){ //0正常退出，1登录失败
 
     switch (opt) {
       case 1:{
-        string command1("SELECT * FROM commodity");
-        admin.view_goods(command1);
+        admin.view_goods();
         break;
       }
       case 2:{
@@ -54,13 +53,11 @@ int admin_mod(){ //0正常退出，1登录失败
         break;
       }
       case 4:{
-        string command4("SELECT * FROM order");
-        admin.view_orders(command4);
+        admin.view_orders();
         break;
       }
       case 5:{
-        string command5("SELECT * FROM user");
-        admin.view_users(command5);
+        admin.view_users();
         break;
       }
       case 6:{
@@ -104,8 +101,7 @@ int buyer_mod(Buyer &buyer, User &user){
 
     switch (opt) {
       case 1:{
-        string command1("SELECT * FROM commodity");
-        buyer.view_goods(command1);
+        buyer.view_goods(user);
         break;
       }
       case 2:{
@@ -113,16 +109,15 @@ int buyer_mod(Buyer &buyer, User &user){
         break;
       }
       case 3:{
-        buyer.search_good();
+        buyer.search_good(user);
         break;
       }
       case 4:{
-        string command4("SELECT * FROM order");
-        buyer.view_orders(command4);
+        buyer.view_orders(user);
         break;
       }
       case 5:{
-        buyer.good_detail();
+        buyer.good_detail(user);
         break;
       }
       case 6:{
@@ -154,8 +149,7 @@ int seller_mod(Seller &seller, User &user){
         break;
       }
       case 2:{
-        string command2("SELECT * FROM commodity");
-        seller.view_goods(command2);
+        seller.view_goods(user);
         break;
       }
       case 3:{
@@ -167,8 +161,7 @@ int seller_mod(Seller &seller, User &user){
         break;
       }
       case 5:{
-        string command5("SELECT * FROM order");
-        seller.view_orders(command5);
+        seller.view_orders(user);
         break;
       }
       case 6:{

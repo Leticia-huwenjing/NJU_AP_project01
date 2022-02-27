@@ -11,22 +11,38 @@ void Buyer::menu() {
   cout << "请输入操作：";
 }
 
-void Buyer::view_goods(string command) {
-  ;
+void Buyer::view_goods(User &user) {
+  string manipulator = "buyer";
+  string instruction = "SELECT * FROM commodity";
+  mysql(instruction, manipulator, user);
 }
 
-void Buyer::search_good() {
-  ;
+void Buyer::search_good(User &user) {
+  string manipulator = "buyer";
+  string instruction = "SELECT * FROM commodity WHERE 名称 CONTAINS ";
+  cout << "请输入商品名称：";
+  string this_name;
+  cin >> this_name;
+  instruction.append(this_name);
+  mysql(instruction, manipulator, user);
 }
 
-void Buyer::view_orders(string command) {
-  ;
+void Buyer::view_orders(User &user) {
+  string manipulator = "buyer";
+  string instruction = "SELECT * FROM order";
+  mysql(instruction, manipulator, user);
 }
 
 void Buyer::buy_good(User &user) {
   ;
 }
 
-void Buyer::good_detail() {
-  ;
+void Buyer::good_detail(User &user) {
+  string manipulator = "buyer";
+  string instruction = "SELECT * FROM commodity WHERE 商品ID CONTAINS ";
+  cout << "请输入您想要查看的商品ID：";
+  string this_good_id;
+  cin >> this_good_id;
+  instruction.append(this_good_id);
+  mysql(instruction, manipulator, user);
 }

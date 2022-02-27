@@ -11,16 +11,20 @@ void Seller::menu() {
   cout << "请输入操作：";
 }
 
-void Seller::view_goods(string command) {
-  ;
+void Seller::view_goods(User &user) {
+  string manipulator = "seller";
+  string instruction = "SELECT * FROM commodity";
+  mysql(instruction, manipulator, user);
 }
 
 void Seller::remove_good(User &user) {
   ;
 }
 
-void Seller::view_orders(string command) {
-  ;
+void Seller::view_orders(User &user) {
+  string manipulator = "seller";
+  string instruction = "SELECT * FROM order";
+  mysql(instruction, manipulator, user);
 }
 
 void Seller::sell_good(User &user) {

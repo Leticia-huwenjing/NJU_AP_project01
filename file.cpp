@@ -46,6 +46,7 @@ void read_users(){
     cur_user.condition = this_condition;
     store_users.push_back(cur_user);
   }
+  ifs.close();
 }
 
 void read_goods(){
