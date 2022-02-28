@@ -99,8 +99,8 @@ void Manager::remove_good() {
       if(store_goods[i].good_id == this_good_id){
         if(store_goods[i].condition == "销售中"){
           is_alive = true;
-          break;
         }
+        break;
       }
     }
     if(!is_alive){
