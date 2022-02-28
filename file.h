@@ -15,6 +15,10 @@ extern vector<order> store_orders;
 extern vector<deposit> store_recharge;
 
 using namespace std;
+
+//文件初始化
+void init();
+
 //读取
 void read();
 void read_users();

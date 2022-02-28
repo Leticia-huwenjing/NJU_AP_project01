@@ -262,6 +262,7 @@ int user_module(){ //0正常退出，1登录失败
 
 int main()
 {
+  init();
   read();
   int opt=0;
   while (true)

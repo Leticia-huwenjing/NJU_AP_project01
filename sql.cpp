@@ -101,6 +101,9 @@ void update(string instruction, string& manipulator, User& user){
     if(instruction.find("用户") != string::npos){
       update_user_admin(instruction);
     }
+    else if(instruction.find("卖家") != string::npos){
+      update_commodity_admin(instruction);
+    }
     else{
       update_good_admin(instruction);
     }
@@ -262,11 +265,57 @@ void search_admin(string instruction) {
 }
 
 void update_good_admin(string instruction) {
-  ;
+  int p = instruction.find('M');
+  string this_good_id = instruction.substr(p);
+  int len = store_goods.size();
+  for(int i = 0; i < len; i++){
+    if(store_goods[i].good_id == this_good_id){
+      store_goods[i].condition = "已下架";
+      break;
+    }
+  }
+  write_goods();
+
+  ofstream ofs("/Users/huwenjing/project01/commands.txt",ios::app);
+  ofs << sql_date() << instruction << endl;
+  ofs.close();
 }
 
 void update_user_admin(string instruction) {
-  ;
+  int p1 = instruction.find('U');
+  string instruction1 = instruction.substr(p1+1);
+  int p2 = instruction1.find('U');
+  string this_user_id = instruction1.substr(p2);
+  int len = store_users.size();
+  for(int i = 0; i < len; i++){
+    if(store_users[i].user_id == this_user_id){
+      store_users[i].condition = "封禁";
+      break;
+    }
+  }
+  write_users();
+
+  ofstream ofs("/Users/huwenjing/project01/commands.txt",ios::app);
+  ofs << sql_date() << instruction << endl;
+  ofs.close();
+}
+
+void update_commodity_admin(string instruction){
+  int p1 = instruction.find('U');
+  string instruction1 = instruction.substr(p1+1);
+  int p2 = instruction1.find('U');
+  string this_user_id = instruction1.substr(p2);
+  int len = store_goods.size();
+  for(int i = 0; i < len; i++){
+    if(store_goods[i].seller_id == this_user_id){
+      store_goods[i].condition = "已下架";
+    }
+  }
+  write_goods();
+
+  ofstream ofs("/Users/huwenjing/project01/commands.txt",ios::app);
+  ofs << sql_date() << instruction << endl;
+  ofs.close();
 }
 
 void select_buyer(string instruction, User& user){
@@ -566,16 +615,54 @@ void select_seller(string instruction, User& user) {
 }
 
 void insert_seller(string instruction, User& user){
-  ;
+  //上架商品
+  string this_name;
+  string this_price;
+  string this_stock;
+  string this_information;
+  string copy = instruction;
+  int p1 = instruction.find('(');
+  instruction = instruction.substr(p1+1);
+  int p2 = instruction.find(',');
+  string without_name = instruction.substr(p2+1);
+  this_name = instruction.erase(p2);
+  int p3 = without_name.find(',');
+  string without_price = without_name.substr(p3+1);
+  this_price = without_name.erase(p3);
+  int p4 = without_price.find(',');
+  string without_stock = without_price.substr(p4+1);
+  this_stock = without_price.erase(p4);
+  int p5 = without_stock.find(')');
+  this_information = without_stock.erase(p5);
+  int len = store_goods.size();
+  string last_good_id = store_goods[len-1].good_id.substr(1);
+  int pre = stoi(last_good_id);
+  pre++;
+  string new_good_id;
+  stringstream ss;
+  ss << pre;
+  ss >> new_good_id;
+  while(new_good_id.size()<3){
+    new_good_id = "0"+new_good_id;
+  }
+  new_good_id = "M"+new_good_id;
+  commodity this_good;
+  this_good.good_id = new_good_id;
+  this_good.good_name = this_name;
+  this_good.good_price = this_price;
+  this_good.stock = this_stock;
+  this_good.information = this_information;
+  this_good.seller_id = user.id;
+  this_good.time = date();
+  this_good.condition = "销售中";
+  store_goods.push_back(this_good);
+  write_goods();
+
+  ofstream ofs("/Users/huwenjing/project01/commands.txt",ios::app);
+  ofs << sql_date() << copy << endl;
+  ofs.close();
 }
 
 void update_seller(string instruction, User& user){
   ;
 }
-
-
-
-
-
-
-

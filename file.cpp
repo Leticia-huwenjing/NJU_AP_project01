@@ -4,6 +4,64 @@
 
 #include "file.h"
 
+//文件初始化
+void init(){
+  string file_user = "/Users/huwenjing/project01/user.txt";
+  string file_commodity = "/Users/huwenjing/project01/commodity.txt";
+  string file_commands = "/Users/huwenjing/project01/commands.txt";
+  string file_order = "/Users/huwenjing/project01/order.txt";
+  string file_recharge = "/Users/huwenjing/project01/recharge.txt";
+
+  ifstream ifs_user(file_user);
+  if(!ifs_user){
+    ofstream ofs_user(file_user);
+    ofs_user << "用户ID,用户名,密码,联系方式,地址,钱包余额,用户状态";
+    ofs_user.close();
+  }
+  else{
+    ifs_user.close();
+  }
+
+  ifstream ifs_commidity(file_commodity);
+  if(!ifs_commidity){
+    ofstream ofs_commodity(file_commodity);
+    ofs_commodity << "商品ID,名称,价格,数量,描述,卖家ID,上架时间,商品状态";
+    ofs_commodity.close();
+  }
+  else{
+    ifs_commidity.close();
+  }
+
+  ifstream ifs_commands(file_commands);
+  if(!ifs_commands){
+    ofstream ofs_commands(file_commands);
+    ofs_commands.close();
+  }
+  else{
+    ifs_commands.close();
+  }
+
+  ifstream ifs_order(file_order);
+  if(!ifs_order){
+    ofstream ofs_order(file_order);
+    ofs_order << "订单ID,商品ID,交易单价,数量,交易时间,卖家ID,买家ID";
+    ofs_order.close();
+  }
+  else{
+    ifs_order.close();
+  }
+
+  ifstream ifs_recharge(file_recharge);
+  if(!ifs_recharge){
+    ofstream ofs_recharge(file_recharge);
+    ofs_recharge << "用户ID,充值金额";
+    ofs_recharge.close();
+  }
+  else{
+    ifs_recharge.close();
+  }
+}
+
 //读取
 void read() {
   read_users();

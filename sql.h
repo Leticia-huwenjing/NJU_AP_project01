@@ -21,6 +21,7 @@ void select_admin(string instruction);
 void search_admin(string instruction); //select含有WHERE时
 void update_good_admin(string instruction); //下架商品
 void update_user_admin(string instruction); //封禁用户（需要调用下架商品）
+void update_commodity_admin(string instruction); //下架被封禁用户所有商品
 
 //buyer
 void select_buyer(string instruction, User& user);

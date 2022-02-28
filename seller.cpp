@@ -43,11 +43,99 @@ void Seller::sell_good(User &user) {
   cout << endl;
 
   //判断用户输入是否合法
+  bool res = true;
+  //判断价格是否为大于0的一位小数
+  int len_price = this_good_price.size();
+  int point_dot = this_good_price.find('.');
+  if(len_price-point_dot > 2){
+    res = false;
+  }
+  else{
+    for(int i = 0; i < point_dot; i++){
+      if(!(this_good_price[i] >= '0' && this_good_price[i] <= '9')){
+        res = false;
+        break;
+      }
+    }
+    if(!(this_good_price[point_dot+1] >= '0' && this_good_price[point_dot+1] <= '9')){
+      res = false;
+    }
 
-  //Todo:判断价格是否为大于0的一位小数
+    bool all_zero = true;
+    if(res) {
+      for (int i = 0; i < point_dot; i++) {
+        if(this_good_price[i] != '0'){
+          all_zero = false;
+          break;
+        }
+      }
+      if(this_good_price[point_dot+1] != '0'){
+        all_zero = false;
+      }
+    }
 
-  //Todo:判断数量是否为大于0的整数
+    if(all_zero){
+      res = false;
+    }
+  }
+  //判断数量是否为大于0的整数
+  int len_stock = this_good_stock.size();
+  for(int i = 0; i < len_stock; i++){
+    if(!(this_good_stock[i] >= '0' && this_good_stock[i] <= '9')){
+      res = false;
+      break;
+    }
+  }
+  bool is_zero = true;
+  for(int i = 0; i < len_stock; i++){
+    if(this_good_stock[i] != '0'){
+      is_zero = false;
+    }
+  }
+  if(is_zero){
+    res = true;
+  }
 
+  //如果res合法，则生成指令
+  if(!res){
+    cout << "*******************" << endl;
+    cout << "价格/数量输入不合法！" << endl;
+    cout << "*******************" << endl;
+  }
+  else{
+    cout << "请确认发布的商品信息无误！" << endl;
+    cout << "***************************************" << endl;
+    cout << "商品名称：" << this_good_name << endl;
+    cout << "商品价格：" << this_good_price << endl;
+    cout << "商品数量：" << this_good_stock << endl;
+    cout << "商品描述：" << this_good_information << endl;
+    cout << "***************************************" << endl;
+    cout << endl;
+    cout << "你确认要发布商品吗？(y/n)";
+
+    //处理用户离谱输入
+    char opt;
+    cin >> opt;
+    while(!cin || getchar()!='\n' || (opt !='y' && opt != 'n')){
+      cout <<"输入不合法！请重新输入：";
+      cin.clear();
+      while(getchar()!='\n');
+      cin >> opt;
+    }
+
+    //选择是否生成指令
+    if(opt == 'n'){
+      cout << "取消商品发布！" << endl;
+    }
+    else{
+      cout << "发布商品成功！" << endl;
+      string manipulator = "seller";
+      string instruction = "INSERT INTO commodity VALUES (";
+      instruction = instruction+this_good_name+","+this_good_price+","+this_good_stock+","+this_good_information+")";
+      mysql(instruction, manipulator, user);
+    }
+  }
+  cout << endl;
 }
 
 void Seller::change_good(User &user) {
