@@ -119,7 +119,7 @@ void User::recharge(User &user) {
     }
   }
   if(this_money.find('.') != string::npos){
-    int p = this_money.find(',');
+    int p = this_money.find('.');
     if(len-p >= 3){
       cout << "充值失败！最多只能输入一位小数！" << endl;
       return ;

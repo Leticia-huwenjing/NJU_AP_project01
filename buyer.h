@@ -7,6 +7,7 @@
 
 #include "user.h"
 #include "sql.h"
+#include "calculator.h"
 
 class Buyer{
  public:

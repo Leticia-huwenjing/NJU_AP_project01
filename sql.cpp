@@ -514,11 +514,117 @@ void search_buyer(string instruction) {
 }
 
 void insert_buyer(string instruction, User& user) {
-  ;
+  //修改订单vector及文件
+  int p1 = instruction.find('(');
+  string ins1 = instruction.substr(p1+1);
+  int p2 = ins1.find(',');
+  string ins2 = ins1.substr(p2+1);
+  string this_order_id = ins1.erase(p2);
+  int p3 = ins2.find(',');
+  string ins3 = ins2.substr(p3+1);
+  string this_good_id = ins2.erase(p3);
+  int p4 = ins3.find(',');
+  string ins4 = ins3.substr(p4+1);
+  string this_good_price = ins3.erase(p4);
+  int p5 = ins4.find(',');
+  string ins5 = ins4.substr(p5+1);
+  string this_order_amount = ins4.erase(p5);
+  int p6 = ins5.find(',');
+  string ins6 = ins5.substr(p6+1);
+  string this_order_time = ins5.erase(p6);
+  int p7 = ins6.find(',');
+  string this_buyer_id = ins6.substr(p7+1, 4);
+  string this_seller_id = ins6.erase(p7);
+  order this_order;
+  this_order.order_id = this_order_id;
+  this_order.good_id = this_good_id;
+  this_order.per_price = this_good_price;
+  this_order.amount = this_order_amount;
+  this_order.time = this_order_time;
+  this_order.seller_id = this_seller_id;
+  this_order.buyer_id = this_buyer_id;
+  store_orders.push_back(this_order);
+  write_orders();
+
+  //修改user.money，包括买家、卖家
+  string buyer_rest;
+  string buyer_notation;
+  buyer_notation = user.money+"-"+this_order_amount+"*"+this_good_price;
+  buyer_rest = calculator(buyer_notation);
+  user.money = buyer_rest;
+  int len = store_users.size();
+  for(int i = 0; i < len; i++){
+    if(store_users[i].user_id == user.id){
+      store_users[i].money = buyer_rest;
+      break;
+    }
+  }
+
+  string seller_rest;
+  string seller_notation;
+  for(int i = 0 ; i < len; i++){
+    if(store_users[i].user_id == this_seller_id){
+      string seller_rest;
+      string seller_notation;
+      seller_notation = store_users[i].money+"+"+this_order_amount+"*"+this_good_price;
+      seller_rest = calculator(seller_notation);
+      store_users[i].money = seller_rest;
+      break;
+    }
+  }
+  write_users();
+
+  //输出交易提醒
+  cout << "********************" << endl;
+  cout << "交易提醒！" << endl;
+  cout << "交易时间：" << this_order_time << endl;
+  cout << "交易单价：" << this_good_price << endl;
+  cout << "交易数量：" << this_order_amount << endl;
+  cout << "交易状态：交易成功" << endl;
+  cout << "您的余额：" << user.money << endl;
+  cout << "********************" << endl;
+
+  //写入命令
+  ofstream ofs("/Users/huwenjing/project01/commands.txt",ios::app);
+  ofs << sql_date() << instruction << endl;
+  ofs.close();
 }
 
-void update_buyer(string instruction, User& user){
-  ;
+void update_buyer(string instruction, User& user){ //两种指令，一种下架，一种更新商品数量
+  if(instruction.find("商品状态") != string::npos){ //下架商品
+    int p = instruction.find('M');
+    string this_good_id = instruction.substr(p);
+    int len = store_goods.size();
+    for(int i = 0; i < len; i++){
+      if(store_goods[i].good_id == this_good_id){
+        store_goods[i].condition = "已下架";
+        break;
+      }
+    }
+    write_goods();
+  }
+  else{ //更新商品数量
+    int p1 = instruction.find('=');
+    string ins1 = instruction.substr(p1+2);
+    int p2 = ins1.find(' ');
+    string ins2 = ins1.substr(p2+1);
+    string this_rest_stock = ins1.erase(p2);
+    int p3 = ins2.find('M');
+    string this_good_id = ins2.substr(p3);
+    int len = store_goods.size();
+    for(int i = 0; i < len; i++){
+      if(store_goods[i].good_id == this_good_id){
+        store_goods[i].stock = this_rest_stock;
+        break;
+      }
+    }
+    write_goods();
+  }
+
+  //写入命令
+  ofstream ofs("/Users/huwenjing/project01/commands.txt",ios::app);
+  ofs << sql_date() << instruction << endl;
+  ofs.close();
 }
 
 void select_seller(string instruction, User& user) {
