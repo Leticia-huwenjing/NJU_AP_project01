@@ -124,6 +124,9 @@ void Seller::sell_good(User &user) {
   //判断用户输入是否合法
   bool res = true;
   //判断价格是否为大于0的一位小数
+  if(this_good_price.find('.') == string::npos){
+    this_good_price = this_good_price.append(".0");
+  }
   int len_price = this_good_price.size();
   int point_dot = this_good_price.find('.');
   if(len_price-point_dot > 2){

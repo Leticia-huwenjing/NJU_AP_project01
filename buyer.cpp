@@ -132,18 +132,24 @@ void Buyer::buy_good(User &user) {
           return ;
         }
         else{ //生成三个指令
-          string last_order_id;
+          string this_order_id;
           int length = store_orders.size();
-          last_order_id = store_orders[length-1].order_id;
-          last_order_id = last_order_id.substr(1);
-          int last_order = stoi(last_order_id);
-          last_order++;
-          string this_order_id = to_string(last_order);
-          while(this_order_id.size() < 3){
-            this_order_id = "0"+this_order_id;
-          }
-          this_order_id = "T"+this_order_id; //当前订单id
+          string last_order_id;
 
+          if(length == 0){
+            this_order_id = "T001";
+          }
+          else {
+            last_order_id = store_orders[length - 1].order_id;
+            last_order_id = last_order_id.substr(1);
+            int last_order = stoi(last_order_id);
+            last_order++;
+            this_order_id = to_string(last_order);
+            while (this_order_id.size() < 3) {
+              this_order_id = "0" + this_order_id;
+            }
+            this_order_id = "T" + this_order_id; //当前订单id
+          }
           string manipulator = "buyer";
           string instruction1 = "INSERT INTO order VALUES (";
           instruction1 = instruction1+this_order_id+","+this_good_id+","+store_goods[i].good_price+","+this_good_amount+","+date()+","+store_goods[i].seller_id+","+user.id+")";
@@ -170,17 +176,24 @@ void Buyer::buy_good(User &user) {
           return ;
         }
         else{ //生成两个指令
-          string last_order_id;
+          string this_order_id;
           int length = store_orders.size();
-          last_order_id = store_orders[length-1].order_id;
-          last_order_id = last_order_id.substr(1);
-          int last_order = stoi(last_order_id);
-          last_order++;
-          string this_order_id = to_string(last_order);
-          while(this_order_id.size() < 3){
-            this_order_id = "0"+this_order_id;
+          string last_order_id;
+
+          if(length == 0){
+            this_order_id = "T001";
           }
-          this_order_id = "T"+this_order_id; //当前订单id
+          else {
+            last_order_id = store_orders[length - 1].order_id;
+            last_order_id = last_order_id.substr(1);
+            int last_order = stoi(last_order_id);
+            last_order++;
+            this_order_id = to_string(last_order);
+            while (this_order_id.size() < 3) {
+              this_order_id = "0" + this_order_id;
+            }
+            this_order_id = "T" + this_order_id; //当前订单id
+          }
 
           string manipulator = "buyer";
           string instruction1 = "INSERT INTO order VALUES (";

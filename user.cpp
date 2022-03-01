@@ -264,16 +264,22 @@ void User::register_account(User &user) {
   ifs.close();
 
   if(res){
-    string last_id = line.erase(4);
-    int cnt = 100*(last_id[1]-'0') + 10*(last_id[2]-'0') + (last_id[3]-'0')+1;
     string new_ID;
-    stringstream ss;
-    ss << cnt;
-    ss >> new_ID;
-    while(new_ID.size()<3){
-      new_ID = "0"+new_ID;
+    if(line[0] != 'U'){
+      new_ID = "U001";
+      user.id = new_ID;
     }
-    user.id += new_ID;
+    else {
+      string last_id = line.erase(4);
+      int cnt = 100 * (last_id[1] - '0') + 10 * (last_id[2] - '0') + (last_id[3] - '0') + 1;
+      stringstream ss;
+      ss << cnt;
+      ss >> new_ID;
+      while (new_ID.size() < 3) {
+        new_ID = "0" + new_ID;
+      }
+      user.id += new_ID;
+    }
     cout << "****** 创建成功！请补充信息 ******" << endl;
     cout << "请输入你的联系方式：";
     cin >> user.tel;

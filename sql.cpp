@@ -741,17 +741,23 @@ void insert_seller(string instruction, User& user){
   int p5 = without_stock.find(')');
   this_information = without_stock.erase(p5);
   int len = store_goods.size();
-  string last_good_id = store_goods[len-1].good_id.substr(1);
-  int pre = stoi(last_good_id);
-  pre++;
+
   string new_good_id;
-  stringstream ss;
-  ss << pre;
-  ss >> new_good_id;
-  while(new_good_id.size()<3){
-    new_good_id = "0"+new_good_id;
+  if(len==0){
+    new_good_id = "M001";
   }
-  new_good_id = "M"+new_good_id;
+  else {
+    string last_good_id = store_goods[len - 1].good_id.substr(1);
+    int pre = stoi(last_good_id);
+    pre++;
+    stringstream ss;
+    ss << pre;
+    ss >> new_good_id;
+    while (new_good_id.size() < 3) {
+      new_good_id = "0" + new_good_id;
+    }
+    new_good_id = "M" + new_good_id;
+  }
   commodity this_good;
   this_good.good_id = new_good_id;
   this_good.good_name = this_name;
