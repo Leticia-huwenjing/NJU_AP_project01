@@ -87,7 +87,7 @@ void Manager::remove_good() {
      && this_good_id[2] >= '0' && this_good_id[2] <= '9' && this_good_id[3] >= '0' && this_good_id[3] <= '9')){
     res = false;
     cout << "***************" << endl;
-    cout << "您的输入不合法！";
+    cout << "您的输入不合法！" << endl;
     cout << "***************" << endl;
   }
 
@@ -180,7 +180,7 @@ void Manager::ban_user() {
       && this_user_id[2] >= '0' && this_user_id[2] <= '9' && this_user_id[3] >= '0' && this_user_id[3] <= '9')){
     res = false;
     cout << "***************" << endl;
-    cout << "您的输入不合法！";
+    cout << "您的输入不合法！" << endl;
     cout << "***************" << endl;
   }
 

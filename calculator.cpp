@@ -16,14 +16,29 @@ bool point_valid(string notation){
   while(!notation.empty() && notation.find('.') != string::npos){
     int len = notation.size();
     unsigned long i = notation.find('.');
-    if(i == 0 || i == len-1 || notation[i-1] == ' ' || notation[i+1] == ' '){
+    if(i == 0 || i == len-1 || notation[i-1] == ' ' || notation[i+1] == ' ' || notation[i+1] == '.'){
       res = false;
       break;
+    }
+    if(notation.substr(i+1).find('.') != string::npos){
+      bool has_operator = false;
+      unsigned long j = notation.substr(i+1).find('.')+i+1;
+      for(unsigned long m = i+1; i < j; m++){
+        if(notation[m] == '+' || notation[m] == '-' || notation[m] == '*' || notation[m] == '/'
+            || notation[m] == '(' || notation[m] == ')'){
+          has_operator = true;
+          break;
+        }
+      }
+      if(!has_operator){
+        res = false;
+        break;
+      }
     }
     notation = notation.substr(i+1);
   }
   return res;
-} //Todo:接受原始表达式，判断如果有小数点，小数点左右是否有空格
+} //接受原始表达式，判断如果有小数点，小数点左右是否有空格
 
 bool blank_valid(string notation){
   bool res = true;

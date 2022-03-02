@@ -31,7 +31,7 @@ void User::information_manu() {
 }
 
 void User::change(User &user) {
-  cout << "情选择修改的属性（1.用户名 2.联系方式 3.地址）：";
+  cout << "请选择修改的属性（1.用户名 2.联系方式 3.地址）：";
   int opt=0;
   cin >> opt;
   while(!cin || getchar()!='\n'){
