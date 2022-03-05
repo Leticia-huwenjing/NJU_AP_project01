@@ -165,6 +165,8 @@ void User::recharge(User &user) {
   notation.append(notation2);
   notation.append(notation3);
 
+  notation = simplify(notation); //化简表达式，生成括号
+
   user.money = calculator(notation);
   int cnt3 = store_users.size();
   for(int i = 0; i < cnt3; i++){

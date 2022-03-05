@@ -27,6 +27,9 @@ bool decimal_valid(string notation);//保证不出现0. .0
 bool digit_valid(string notation);//保证只有一位小数
 string is_valid(string notation);//此时输入的表达式不含有空格,如果不合法，返回不合法原因，如果合法，返回"合法"
 int priority(string str);
+
+string simplify(string notation); //化简计算表达式，合并成交数量一致的交易
+
 string convert(string notation);//将中缀表达式转为逆波兰表达式,在逆波兰表达式中，将&当作负号
 string calculate(string notation);//计算逆波兰表达式,返回除零错误
 string calculator(string notation);//总计算器接口

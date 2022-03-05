@@ -11,6 +11,110 @@
 #include <cmath>
 using namespace std;
 
+string simplify(string notation){
+  struct a_order{
+    string per_price;
+    string amount;
+  };
+  vector<a_order> store;
+  string copy = notation;
+  int len = copy.size();
+  while(copy.find('*') != string::npos){
+    int i = copy.find('*');
+    string front = copy.substr(0,i);
+    int j, k;
+    for(j = i; j >= 0; j--){
+      if(copy[j] == '+' || copy[j] == '-'){
+        break;
+      }
+    }
+    for(k = i; k < len; k++){
+      if(copy[k] == '+' || copy[k] == '-'){
+        break;
+      }
+    }
+    if(k == len){
+      a_order this_order;
+      if(copy[j] == '-'){
+        this_order.per_price = copy.substr(j, i-j);
+      }
+      else{
+        this_order.per_price = copy.substr(j+1, i-j-1);
+      }
+      this_order.amount = copy.substr(i+1);
+      store.push_back(this_order);
+      break;
+    }
+    else{
+      a_order this_order;
+      if(copy[j] == '-'){
+        this_order.per_price = copy.substr(j, i-j);
+      }
+      else{
+        this_order.per_price = copy.substr(j+1, i-j-1);
+      }
+      this_order.amount = copy.substr(i+1, k-i-1);
+      store.push_back(this_order);
+      copy = copy.substr(k);
+    }
+  }
+  string res;
+  if(notation.find('*') != string::npos){
+    int p = notation.find('*');
+    string head = notation.substr(0, p);
+    int q;
+    for(q = p; q >= 0; q--){
+      if(notation[q] == '+' || notation[q] == '-'){
+        break;
+      }
+    }
+    res = notation.substr(0, q);
+  }
+  else{
+    res = notation;
+  }
+  bool is_empty = false;
+  while(!is_empty){
+    string combine_price;
+    string this_amount;
+    for(int i = 0; i < store.size(); i++){
+      if(store[i].amount != "-1"){
+        combine_price = store[i].per_price;
+        this_amount = store[i].amount;
+        store[i].amount = "-1";
+        break;
+      }
+    }
+
+    for(int i = 0; i < store.size(); i++){
+      if(store[i].amount == this_amount){
+        if(store[i].per_price[0] == '-'){
+          combine_price.append(store[i].per_price);
+          store[i].amount = "-1";
+        }
+        else{
+          combine_price.append("+");
+          combine_price.append(store[i].per_price);
+          store[i].amount = "-1";
+        }
+      }
+    }
+    res += "+(" + combine_price + ")*" + this_amount;
+
+    bool all_false = true;
+    for(int i = 0; i < store.size(); i++){
+      if(store[i].amount != "-1"){
+        all_false = false;
+        break;
+      }
+    }
+    if(all_false){
+      is_empty = true;
+    }
+  }
+  return res;
+}
+
 bool point_valid(string notation){
   bool res = true;
   while(!notation.empty() && notation.find('.') != string::npos){
