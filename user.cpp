@@ -44,7 +44,14 @@ void User::change(User &user) {
     case 1:{
       cout << "请输入修改后的用户名：";
       string new_name;
-      cin >> new_name;
+      getline(cin, new_name);
+      if(new_name.find(' ') != string::npos){
+        cout << "***************" << endl;
+        cout << "您的输入不合法！" << endl;
+        cout << "***************" << endl << endl;
+        return ;
+      }
+
       int len = store_users.size();
       bool res = true;
       for(int i = 0; i < len; i++){
@@ -65,7 +72,14 @@ void User::change(User &user) {
     case 2:{
       cout << "请输入修改后的联系方式：";
       string new_tel;
-      cin >> new_tel;
+      getline(cin, new_tel);
+      if(new_tel.find(' ') != string::npos){
+        cout << "***************" << endl;
+        cout << "您的输入不合法！" << endl;
+        cout << "***************" << endl << endl;
+        return ;
+      }
+
       user.tel = new_tel;
       cout << "修改成功！" << endl;
       break;
@@ -73,7 +87,14 @@ void User::change(User &user) {
     case 3: {
       cout << "请输入修改后的地址：";
       string new_address;
-      cin >> new_address;
+      getline(cin, new_address);
+      if(new_address.find(' ') != string::npos){
+        cout << "***************" << endl;
+        cout << "您的输入不合法！" << endl;
+        cout << "***************" << endl << endl;
+        return ;
+      }
+
       user.address = new_address;
       cout << "修改成功！" << endl;
       break;
@@ -108,13 +129,12 @@ void User::see_information(User &user) {
 void User::recharge(User &user) {
   cout << "请输入充值金额：";
   string this_money;
-  cin >> this_money;
+  getline(cin, this_money);
+
   int len = this_money.size();
   for(int i = 0; i < len; i++){
     if(this_money[i] != '.' && !(this_money[i] >= '0' && this_money[i] <= '9')){
       cout << "输入不合法！" << endl;
-      cin.clear();
-      while(getchar()!='\n');
       return ;
     }
   }

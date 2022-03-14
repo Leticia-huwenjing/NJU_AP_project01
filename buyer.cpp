@@ -22,7 +22,14 @@ void Buyer::search_good(User &user) {
   string instruction = "SELECT * FROM commodity WHERE 名称 CONTAINS ";
   cout << "请输入商品名称：";
   string this_name;
-  cin >> this_name;
+  getline(cin, this_name);
+  if(this_name.find(' ') != string::npos){
+    cout << "***************" << endl;
+    cout << "您的输入不合法！";
+    cout << "***************" << endl << endl;
+    return ;
+  }
+
   instruction.append(this_name);
   mysql(instruction, manipulator, user);
 }
@@ -36,7 +43,14 @@ void Buyer::view_orders(User &user) {
 void Buyer::buy_good(User &user) {
   cout << "请输入商品ID：";
   string this_good_id;
-  cin >> this_good_id;
+  getline(cin, this_good_id);
+  if(this_good_id.find(' ') != string::npos){
+    cout << "***************" << endl;
+    cout << "您的输入不合法！";
+    cout << "***************" << endl << endl;
+    return ;
+  }
+
   //收拾离谱买家
   bool res = true;
   int i;
@@ -81,7 +95,14 @@ void Buyer::buy_good(User &user) {
   if(res){
     cout << "请输入数量：";
     string this_good_amount;
-    cin >> this_good_amount;
+    getline(cin, this_good_amount);
+    if(this_good_amount.find(' ') != string::npos){
+      cout << "***************" << endl;
+      cout << "您的输入不合法！";
+      cout << "***************" << endl << endl;
+      return ;
+    }
+
     int size = this_good_amount.size();
     bool is_amount_valid = true;
     for(int j = 0; j < size; j++){
@@ -217,7 +238,14 @@ void Buyer::good_detail(User &user) {
   string instruction = "SELECT * FROM commodity WHERE 商品ID CONTAINS ";
   cout << "请输入您想要查看的商品ID：";
   string this_good_id;
-  cin >> this_good_id;
+  getline(cin, this_good_id);
+  if(this_good_id.find(' ') != string::npos){
+    cout << "***************" << endl;
+    cout << "您的输入不合法！";
+    cout << "***************" << endl << endl;
+    return ;
+  }
+
   instruction.append(this_good_id);
   mysql(instruction, manipulator, user);
 }

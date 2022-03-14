@@ -20,7 +20,14 @@ void Seller::view_goods(User &user) {
 void Seller::remove_good(User &user) {
   cout << "请输入要下架的商品ID：";
   string this_good_id;
-  cin >> this_good_id;
+  getline(cin, this_good_id);
+
+  if(this_good_id.find(' ') != string::npos){
+    cout << "***************" << endl;
+    cout << "您的输入不合法！";
+    cout << "***************" << endl << endl;
+    return ;
+  }
 
   //收拾离谱用户
   bool res = true;
@@ -109,16 +116,43 @@ void Seller::view_orders(User &user) {
 void Seller::sell_good(User &user) {
   string this_good_name;
   cout << "请输入商品名称：";
-  cin >> this_good_name;
+  getline(cin, this_good_name);
+  if(this_good_name.find(' ') != string::npos){
+    cout << "***************" << endl;
+    cout << "您的输入不合法！" << endl;
+    cout << "***************" << endl << endl;
+    return ;
+  }
+
   string this_good_price;
   cout << "请输入商品价格：";
-  cin >> this_good_price;
+  getline(cin, this_good_price);
+  if(this_good_price.find(' ') != string::npos){
+    cout << "***************" << endl;
+    cout << "您的输入不合法！" << endl;
+    cout << "***************" << endl << endl;
+    return ;
+  }
+
   string this_good_stock;
   cout << "请输入商品数量：";
-  cin >> this_good_stock;
+  getline(cin, this_good_stock);
+  if(this_good_stock.find(' ') != string::npos){
+    cout << "***************" << endl;
+    cout << "您的输入不合法！" << endl;
+    cout << "***************" << endl << endl;
+    return ;
+  }
+
   string this_good_information;
   cout << "请输入商品描述：";
-  cin >> this_good_information;
+  getline(cin, this_good_information);
+  if(this_good_information.find(' ') != string::npos){
+    cout << "***************************" << endl;
+    cout << "您输入的商品描述中不能含有空格！" << endl;
+    cout << "***************************" << endl << endl;
+    return ;
+  }
   cout << endl;
 
   //判断用户输入是否合法
@@ -223,7 +257,13 @@ void Seller::sell_good(User &user) {
 void Seller::change_good(User &user) {
   cout << "请输入被修改的商品ID：";
   string this_good_id;
-  cin >> this_good_id;
+  getline(cin, this_good_id);
+  if(this_good_id.find(' ') != string::npos){
+    cout << "***************" << endl;
+    cout << "您的输入不合法！";
+    cout << "***************" << endl << endl;
+    return ;
+  }
 
   //收拾离谱用户
   bool id_res = true;
@@ -275,7 +315,13 @@ void Seller::change_good(User &user) {
         case '1':{
           cout << "请输入被修改商品的价格：";
           string this_good_price;
-          cin >> this_good_price;
+          getline(cin, this_good_price);
+          if(this_good_price.find(' ') != string::npos){
+            cout << "***************" << endl;
+            cout << "您的输入不合法！";
+            cout << "***************" << endl << endl;
+            return ;
+          }
 
           bool res = true;
           //判断价格是否为大于0的一位小数
@@ -355,7 +401,13 @@ void Seller::change_good(User &user) {
         case '2':{
           cout << "请输入被修改商品的描述：";
           string this_information;
-          cin >> this_information;
+          getline(cin, this_information);
+          if(this_information.find(' ') != string::npos){
+            cout << "*************************" << endl;
+            cout << "您输入的商品描述不能含有括号！";
+            cout << "*************************" << endl << endl;
+            return ;
+          }
 
           cout << "请确认修改的信息无误！" << endl;
           cout << "*************************" << endl;

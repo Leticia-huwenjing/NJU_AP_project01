@@ -15,10 +15,20 @@ bool Manager::log_in() {
   bool res = false;
   cout << "请输入管理员姓名：";
   string test_name;
-  cin >> test_name;
+  getline(cin, test_name);
+  if(test_name.find(' ') != string::npos){
+    cout << endl;
+    cout << "管理员姓名不合法！" << endl << endl;
+    return false;
+  }
   cout << "请输入密码：";
   string test_password;
-  cin >> test_password;
+  getline(cin, test_password);
+  if(test_password.find(' ') != string::npos){
+    cout << endl;
+    cout << "密码含有空格！" << endl << endl;
+    return false;
+  }
   if(name == test_name){
     if(password == test_password){
       res = true;
@@ -66,7 +76,11 @@ void Manager::search_goods() {
   string instruction = "SELECT * FROM commodity WHERE 名称 CONTAINS ";
   cout << "请输入商品名称：";
   string this_name;
-  cin >> this_name;
+  getline(cin, this_name);
+  if(this_name.find(' ') != string::npos){
+    cout << "商品名称不能含有空格！" << endl << endl;
+    return ;
+  }
   instruction.append(this_name);
   mysql(instruction, manipulator, user);
 }
@@ -78,7 +92,13 @@ void Manager::remove_good() {
 
   cout << "请输入要下架的商品ID：";
   string this_good_id;
-  cin >> this_good_id;
+  getline(cin, this_good_id);
+  if(this_good_id.find(' ') != string::npos){
+    cout << "***************" << endl;
+    cout << "您的输入不合法！" << endl;
+    cout << "***************" << endl << endl;
+    return ;
+  }
 
   //收拾离谱管理员
   bool res = true;
@@ -171,7 +191,13 @@ void Manager::ban_user() {
 
   cout << "请输入要封禁的用户ID：";
   string this_user_id;
-  cin >> this_user_id;
+  getline(cin, this_user_id);
+  if(this_user_id.find(' ') != string::npos){
+    cout << "***************" << endl;
+    cout << "您的输入不合法！" << endl;
+    cout << "***************" << endl << endl;
+    return ;
+  }
 
   //收拾离谱管理员
   bool res = true;

@@ -79,10 +79,22 @@ int admin_mod(){ //0正常退出，1登录失败
 void register_module(){
   cout << "请输入用户名：";
   string test_name;
-  cin >> test_name;
+  getline(cin, test_name);
+  if(test_name.find(' ') != string::npos){
+    cout << "***************" << endl;
+    cout << "您的输入不合法！" << endl;
+    cout << "***************" << endl << endl;
+    return ;
+  }
   cout << "请输入密码：";
   string test_password;
-  cin >> test_password;
+  getline(cin, test_password);
+  if(test_password.find(' ') != string::npos){
+    cout << "***************" << endl;
+    cout << "您的输入不合法！" << endl;
+    cout << "***************" << endl << endl;
+    return ;
+  }
   User user(test_name, test_password);
   user.register_account(user);
 }
