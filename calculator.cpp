@@ -112,7 +112,7 @@ string simplify(string notation){
       is_empty = true;
     }
   }
-  return res;
+  return notation;
 }
 
 bool point_valid(string notation){
