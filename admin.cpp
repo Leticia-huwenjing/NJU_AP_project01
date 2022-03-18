@@ -158,7 +158,6 @@ void Manager::remove_good() {
     while(!cin || getchar()!='\n' || (opt !='y' && opt != 'n')){
       cout <<"输入不合法！请重新输入：";
       cin.clear();
-      while(getchar()!='\n');
       cin >> opt;
     }
     if(opt == 'n'){
@@ -210,7 +209,7 @@ void Manager::ban_user() {
     cout << "***************" << endl;
   }
 
-    //处理商品id不存在或已下架
+    //处理用户不存在
   else{
     bool is_alive = false;
     int len = store_users.size();
@@ -249,10 +248,9 @@ void Manager::ban_user() {
 
     char opt;
     cin >> opt;
-    while(!cin || getchar()!='\n' || (opt !='y' && opt != 'n')){
+    while(getchar()!='\n' || (opt !='y' && opt != 'n')){
       cout <<"输入不合法！请重新输入：";
       cin.clear();
-      while(getchar()!='\n');
       cin >> opt;
     }
     if(opt == 'n'){

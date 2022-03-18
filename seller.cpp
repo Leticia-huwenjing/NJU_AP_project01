@@ -24,7 +24,7 @@ void Seller::remove_good(User &user) {
 
   if(this_good_id.find(' ') != string::npos){
     cout << "***************" << endl;
-    cout << "您的输入不合法！";
+    cout << "您的输入不合法！" << endl;
     cout << "***************" << endl << endl;
     return ;
   }
@@ -36,7 +36,7 @@ void Seller::remove_good(User &user) {
       && this_good_id[2] >= '0' && this_good_id[2] <= '9' && this_good_id[3] >= '0' && this_good_id[3] <= '9')){
     res = false;
     cout << "***************" << endl;
-    cout << "您的输入不合法！";
+    cout << "您的输入不合法！" << endl;
     cout << "***************" << endl;
   }
 
@@ -90,7 +90,6 @@ void Seller::remove_good(User &user) {
     while(!cin || getchar()!='\n' || (opt !='y' && opt != 'n')){
       cout <<"输入不合法！请重新输入：";
       cin.clear();
-      while(getchar()!='\n');
       cin >> opt;
     }
     if(opt == 'n'){
@@ -235,7 +234,6 @@ void Seller::sell_good(User &user) {
     while(!cin || getchar()!='\n' || (opt !='y' && opt != 'n')){
       cout <<"输入不合法！请重新输入：";
       cin.clear();
-      while(getchar()!='\n');
       cin >> opt;
     }
 
@@ -260,7 +258,7 @@ void Seller::change_good(User &user) {
   getline(cin, this_good_id);
   if(this_good_id.find(' ') != string::npos){
     cout << "***************" << endl;
-    cout << "您的输入不合法！";
+    cout << "您的输入不合法！" << endl;
     cout << "***************" << endl << endl;
     return ;
   }
@@ -272,7 +270,7 @@ void Seller::change_good(User &user) {
       && this_good_id[2] >= '0' && this_good_id[2] <= '9' && this_good_id[3] >= '0' && this_good_id[3] <= '9')){
     id_res = false;
     cout << "***************" << endl;
-    cout << "您的输入不合法！";
+    cout << "您的输入不合法！" << endl;
     cout << "***************" << endl;
   }
 
@@ -303,7 +301,7 @@ void Seller::change_good(User &user) {
     bool opt_res = true;
     cout << "请输入被修改的商品属性（1.价格 2.描述）";
     string attribute;
-    cin >> attribute;
+    getline(cin, attribute);
     if(attribute != "1" && attribute != "2"){
       opt_res = false;
       cout << "**************" << endl;
@@ -318,7 +316,7 @@ void Seller::change_good(User &user) {
           getline(cin, this_good_price);
           if(this_good_price.find(' ') != string::npos){
             cout << "***************" << endl;
-            cout << "您的输入不合法！";
+            cout << "您的输入不合法！" << endl;
             cout << "***************" << endl << endl;
             return ;
           }
@@ -376,10 +374,9 @@ void Seller::change_good(User &user) {
 
             char opt;
             cin >> opt;
-            while(!cin || getchar()!='\n' || (opt !='y' && opt != 'n')){
+            while(getchar()!='\n' || (opt !='y' && opt != 'n')){
               cout <<"输入不合法！请重新输入：";
               cin.clear();
-              while(getchar()!='\n');
               cin >> opt;
             }
 
@@ -404,7 +401,7 @@ void Seller::change_good(User &user) {
           getline(cin, this_information);
           if(this_information.find(' ') != string::npos){
             cout << "*************************" << endl;
-            cout << "您输入的商品描述不能含有括号！";
+            cout << "您输入的商品描述不能含有括号！" << endl;
             cout << "*************************" << endl << endl;
             return ;
           }
@@ -420,10 +417,9 @@ void Seller::change_good(User &user) {
 
           char opt;
           cin >> opt;
-          while(!cin || getchar()!='\n' || (opt !='y' && opt != 'n')){
+          while(getchar()!='\n' || (opt !='y' && opt != 'n')){
             cout <<"输入不合法！请重新输入：";
             cin.clear();
-            while(getchar()!='\n');
             cin >> opt;
           }
 
