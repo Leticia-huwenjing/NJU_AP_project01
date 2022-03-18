@@ -227,10 +227,23 @@ int person_mod(User &user){
 int user_module(){ //0正常退出，1登录失败
   cout << "请输入用户名：";
   string test_name;
-  cin >> test_name;
+  getline(cin, test_name);
+  if(test_name.find(' ') != string::npos){
+    cout << "***************" << endl;
+    cout << "您的输入不合法！" << endl;
+    cout << "***************" << endl << endl;
+    return 1;
+  }
   cout << "请输入密码：";
   string test_password;
-  cin >> test_password;
+  getline(cin, test_password);
+  if(test_password.find(' ') != string::npos){
+    cout << "***************" << endl;
+    cout << "您的输入不合法！" << endl;
+    cout << "***************" << endl << endl;
+    return 1;
+  }
+
   User user(test_name, test_password);
   if(user.log_in(user)) {
     while (true) {
