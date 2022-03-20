@@ -51,12 +51,102 @@ bool Manager::log_in() {
 }
 
 void Manager::view_goods() {
-  string manipulator = "admin";
-  string instruction = "SELECT * FROM commodity";
-  string fake_name = "";
-  string fake_password = "";
-  User user(fake_name,fake_password);
-  mysql(instruction, manipulator, user);
+  cout << "请选择商品排序方式（1.商品编号 2.价格升序 3.价格降序）：";
+  string opt;
+  getline(cin, opt);
+  if(opt.find(' ') != string::npos || opt.size() > 1){
+    cout << "****************" << endl;
+    cout << "您的输入不合法！" << endl;
+    cout << "****************" << endl;
+    return ;
+  }
+  switch (opt[0]) {
+    case '1':{
+      string manipulator = "admin";
+      string instruction = "SELECT * FROM commodity";
+      string fake_name = "";
+      string fake_password = "";
+      User user(fake_name,fake_password);
+      mysql(instruction, manipulator, user);
+      break;
+    }
+    case '2':{
+      vector<commodity> tmp(store_goods);
+      sort(tmp.begin(), tmp.end(), [](const commodity &a, const commodity &b)->bool{return stof(a.good_price) < stof(b.good_price);});
+      int len = tmp.size();
+      if(len == 0){
+        cout << "**************" << endl;
+        cout << "当前没有商品！" << endl;
+        cout << "**************" << endl;
+      }
+      else{
+        cout
+            << "*************************************************************************************************************************************"
+            << endl;
+        cout << left << setw_u8(20, "商品ID") << "商品ID"
+             << left << setw_u8(20, "名称") << "名称"
+             << left << setw_u8(20, "价格") << "价格"
+             << left << setw_u8(20, "上架时间") << "上架时间"
+             << left << setw_u8(20, "卖家ID") << "卖家ID"
+             << left << setw_u8(20, "数量") << "数量"
+             << left << setw_u8(20, "商品状态") << "商品状态" << endl;
+        for(int i = 0; i < len; i++){
+          cout << left << setw_u8(20, tmp[i].good_id) << tmp[i].good_id
+              << left << setw_u8(20, tmp[i].good_name) << tmp[i].good_name
+              << left << setw_u8(20, tmp[i].good_price) << tmp[i].good_price
+              << left << setw_u8(20, tmp[i].time) << tmp[i].time
+              << left << setw_u8(20, tmp[i].seller_id) << tmp[i].seller_id
+               << left << setw_u8(20, tmp[i].stock) << tmp[i].stock
+               << left << setw_u8(20, tmp[i].condition) << tmp[i].condition << endl;
+        }
+        cout
+            << "*************************************************************************************************************************************"
+            << endl;
+      }
+      break;
+    }
+    case '3':{
+      vector<commodity> tmp(store_goods);
+      sort(tmp.begin(), tmp.end(), [](const commodity &a, const commodity &b)->bool{return stof(a.good_price) > stof(b.good_price);});
+      int len = tmp.size();
+      if(len == 0){
+        cout << "**************" << endl;
+        cout << "当前没有商品！" << endl;
+        cout << "**************" << endl;
+      }
+      else{
+        cout
+            << "*************************************************************************************************************************************"
+            << endl;
+        cout << left << setw_u8(20, "商品ID") << "商品ID"
+             << left << setw_u8(20, "名称") << "名称"
+             << left << setw_u8(20, "价格") << "价格"
+             << left << setw_u8(20, "上架时间") << "上架时间"
+             << left << setw_u8(20, "卖家ID") << "卖家ID"
+             << left << setw_u8(20, "数量") << "数量"
+             << left << setw_u8(20, "商品状态") << "商品状态" << endl;
+        for(int i = 0; i < len; i++){
+          cout << left << setw_u8(20, tmp[i].good_id) << tmp[i].good_id
+               << left << setw_u8(20, tmp[i].good_name) << tmp[i].good_name
+               << left << setw_u8(20, tmp[i].good_price) << tmp[i].good_price
+               << left << setw_u8(20, tmp[i].time) << tmp[i].time
+               << left << setw_u8(20, tmp[i].seller_id) << tmp[i].seller_id
+               << left << setw_u8(20, tmp[i].stock) << tmp[i].stock
+               << left << setw_u8(20, tmp[i].condition) << tmp[i].condition << endl;
+        }
+        cout
+            << "*************************************************************************************************************************************"
+            << endl;
+      }
+      break;
+    }
+    default:{
+      cout << "****************" << endl;
+      cout << "您的输入不合法！" << endl;
+      cout << "****************" << endl;
+    }
+  }
+  cout << endl;
 }
 
 void Manager::view_orders() {

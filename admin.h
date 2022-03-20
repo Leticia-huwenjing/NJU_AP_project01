@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <iomanip>
+#include <vector>
+#include <algorithm>
 #include "file.h"
 #include "sql.h"
 #include "user.h"

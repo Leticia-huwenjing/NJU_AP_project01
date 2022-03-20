@@ -31,7 +31,7 @@ void User::information_manu() {
 }
 
 void User::change(User &user) {
-  cout << "请选择修改的属性（1.用户名 2.联系方式 3.地址）：";
+  cout << "请选择修改的属性（1.用户名 2.联系方式 3.地址 4.密码）：";
   int opt=0;
   cin >> opt;
   while(!cin || getchar()!='\n'){
@@ -99,8 +99,22 @@ void User::change(User &user) {
       cout << "修改成功！" << endl;
       break;
     }
+    case 4:{
+      cout << "请输入修改后的密码：";
+      string new_password;
+      getline(cin, new_password);
+      if(new_password.find(' ') != string::npos){
+        cout << "***************" << endl;
+        cout << "您的输入不合法！" << endl;
+        cout << "***************" << endl << endl;
+        return ;
+      }
+      user.password = new_password;
+      cout << "修改成功！" << endl;
+      break;
+    }
     default:{
-      cout << "请输入1-3之间的整数！" << endl;
+      cout << "请输入1-4之间的整数！" << endl;
       break;
     }
   }
@@ -110,6 +124,7 @@ void User::change(User &user) {
       store_users[i].user_name = user.name;
       store_users[i].address = user.address;
       store_users[i].tel = user.tel;
+      store_users[i].password = user.password;
       break;
     }
   }
