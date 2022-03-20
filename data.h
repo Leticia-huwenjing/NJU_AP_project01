@@ -50,4 +50,12 @@ struct cart{
   vector<commodity> shoppingCart;
 };
 
+struct message{
+  string sender_id;
+  string receiver_id;
+  string info;
+  string date;
+  string condition;
+};
+
 #endif //PROJECT01__DATA_H_

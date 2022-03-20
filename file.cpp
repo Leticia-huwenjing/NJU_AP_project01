@@ -12,6 +12,7 @@ void init(){
   string file_order = "/Users/huwenjing/project01/order.txt";
   string file_recharge = "/Users/huwenjing/project01/recharge.txt";
   string file_cart = "/Users/huwenjing/project01/shoppingCart.txt";
+  string file_message = "/Users/huwenjing/project01/chatting.txt";
 
   ifstream ifs_user(file_user);
   if(!ifs_user){
@@ -71,6 +72,16 @@ void init(){
   else{
     ifs_cart.close();
   }
+
+  ifstream ifs_chat(file_message);
+  if(!ifs_chat){
+    ofstream ofs_chat(file_message);
+    ofs_chat << "发送者ID,接受者ID,内容,发送时间,留言状态";
+    ofs_chat.close();
+  }
+  else{
+    ifs_chat.close();
+  }
 }
 
 //读取
@@ -80,6 +91,7 @@ void read() {
   read_orders();
   read_recharge();
   read_cart();
+  read_message();
 }
 
 void read_users(){
@@ -255,6 +267,32 @@ void read_cart(){
   ifs.close();
 }
 
+void read_message(){
+  ifstream ifs("/Users/huwenjing/project01/chatting.txt");
+  string line;
+  getline(ifs, line);
+  while(getline(ifs, line)){
+    string without_sender = line.substr(5);
+    string sender_id = line.erase(4);
+    string without_receiver = without_sender.substr(5);
+    string receiver_id = without_sender.erase(4);
+    int p1 = without_receiver.find(',');
+    string without_info= without_receiver.substr(p1+1);
+    string information = without_receiver.erase(p1);
+    int p2 = without_info.find(',');
+    string condition = without_info.substr(p2+1);
+    string time = without_info.erase(p2);
+    message this_message;
+    this_message.sender_id = sender_id;
+    this_message.receiver_id = receiver_id;
+    this_message.info = information;
+    this_message.date = time;
+    this_message.condition = condition;
+    store_message.push_back(this_message);
+  }
+  ifs.close();
+}
+
 void write_users(){
   ofstream ofs("/Users/huwenjing/project01/user.txt");
   ofs << "用户ID,用户名,密码,联系方式,地址,钱包余额,用户状态";
@@ -316,6 +354,19 @@ void write_cart(){
           << store_cart[i].user_id << "," << store_cart[i].shoppingCart[j].good_id  << ","
           << store_cart[i].shoppingCart[j].stock << "," << store_cart[i].shoppingCart[j].condition;
     }
+  }
+  ofs.close();
+}
+
+void write_message(){
+  ofstream ofs("/Users/huwenjing/project01/chatting.txt");
+  ofs << "发送者ID,接受者ID,内容,发送时间,留言状态";
+  int len = store_message.size();
+  for(int i = 0; i < len; i++){
+    ofs << endl
+        << store_message[i].sender_id << "," << store_message[i].receiver_id << ","
+        << store_message[i].info << "," << store_message[i].date << ","
+        << store_message[i].condition;
   }
   ofs.close();
 }

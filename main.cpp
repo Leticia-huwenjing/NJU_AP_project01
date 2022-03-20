@@ -20,6 +20,7 @@ vector<commodity> store_goods;
 vector<order> store_orders;
 vector<deposit> store_recharge;
 vector<cart> store_cart;
+vector<message> store_message;
 
 void main_manu(){
   cout << "==========================================" << endl;
@@ -271,6 +272,42 @@ int person_mod(User &user){
   }
 }
 
+int chat_mod(User &user){
+  int opt=0;
+  Chatting chat;
+  while(true){
+    chat.chat_menu();
+    cin >> opt;
+    while(!cin || getchar()!='\n'){
+      cout << "输入不合法!请重新输入：";
+      cin.clear();
+      while(getchar()!='\n');
+      cin >> opt;
+    }
+
+    switch (opt) {
+      case 1:{
+        chat.write_message(user);
+        break;
+      }
+      case 2:{
+        chat.see_new_message(user);
+        break;
+      }
+      case 3:{
+        chat.see_message_history(user);
+        break;
+      }
+      case 4:{
+        return 0;
+      }
+      default:{
+        cout << "请输入1-4之间的整数！" << endl;
+        break;
+      }
+    }
+  }
+}
 
 int user_module(){ //0正常退出，1登录失败
   cout << "请输入用户名：";
@@ -321,10 +358,13 @@ int user_module(){ //0正常退出，1登录失败
           break;
         }
         case 4: {
+          //Todo:留言系统
+        }
+        case 5:{
           return 0;
         }
         default: {
-          cout << "请输入1-4之间的整数！" << endl;
+          cout << "请输入1-5之间的整数！" << endl;
           break;
         }
       }
