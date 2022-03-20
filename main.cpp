@@ -287,7 +287,7 @@ int chat_mod(User &user){
 
     switch (opt) {
       case 1:{
-        chat.write_message(user);
+        chat.add_message(user);
         break;
       }
       case 2:{
@@ -359,6 +359,7 @@ int user_module(){ //0正常退出，1登录失败
         }
         case 4: {
           chat_mod(user);
+          break;
         }
         case 5:{
           return 0;

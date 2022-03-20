@@ -7,13 +7,15 @@
 
 #include <iostream>
 #include "user.h"
+#include "data.h"
+#include "sql.h"
 using namespace std;
 
 
 class Chatting{
  public:
   void chat_menu();
-  void write_message(User &user);
+  void add_message(User &user);
   void see_new_message(User &user);
   void see_message_history(User &user);
  private:
