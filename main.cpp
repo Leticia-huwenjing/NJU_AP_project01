@@ -358,7 +358,7 @@ int user_module(){ //0正常退出，1登录失败
           break;
         }
         case 4: {
-          //Todo:留言系统
+          chat_mod(user);
         }
         case 5:{
           return 0;
