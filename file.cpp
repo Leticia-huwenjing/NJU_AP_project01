@@ -11,6 +11,7 @@ void init(){
   string file_commands = "/Users/huwenjing/project01/commands.txt";
   string file_order = "/Users/huwenjing/project01/order.txt";
   string file_recharge = "/Users/huwenjing/project01/recharge.txt";
+  string file_cart = "/Users/huwenjing/project01/shoppingCart.txt";
 
   ifstream ifs_user(file_user);
   if(!ifs_user){
@@ -60,6 +61,16 @@ void init(){
   else{
     ifs_recharge.close();
   }
+
+  ifstream ifs_cart(file_cart);
+  if(!ifs_cart){
+    ofstream ofs_cart(file_cart);
+    ofs_cart << "用户ID,商品ID,商品数量,商品状态";
+    ofs_cart.close();
+  }
+  else{
+    ifs_cart.close();
+  }
 }
 
 //读取
@@ -68,6 +79,7 @@ void read() {
   read_goods();
   read_orders();
   read_recharge();
+  read_cart();
 }
 
 void read_users(){
@@ -206,6 +218,43 @@ void read_recharge(){
   ifs.close();
 }
 
+void read_cart(){
+  ifstream ifs("/Users/huwenjing/project01/shoppingCart.txt");
+  string line;
+  getline(ifs, line);
+  while(getline(ifs, line)){
+    string good = line.substr(5);
+    string user_id = line.erase(4);
+    string amount_and_condition = good.substr(5);
+    string good_id = good.erase(4);
+    int p = amount_and_condition.find(',');
+    string good_condition = amount_and_condition.substr(p+1);
+    string good_amount = amount_and_condition.erase(p);
+
+    commodity this_commodity;
+    this_commodity.good_id = good_id;
+    this_commodity.stock = good_amount;
+    this_commodity.condition = good_condition;
+
+    bool res = false;
+    for(int i = 0; i < store_cart.size(); i++){
+      if(store_cart[i].user_id == user_id){
+        store_cart[i].shoppingCart.push_back(this_commodity);
+        res = true;
+        break;
+      }
+    }
+
+    if(!res){
+      cart this_cart;
+      this_cart.user_id = user_id;
+      this_cart.shoppingCart.push_back(this_commodity);
+      store_cart.push_back(this_cart);
+    }
+  }
+  ifs.close();
+}
+
 void write_users(){
   ofstream ofs("/Users/huwenjing/project01/user.txt");
   ofs << "用户ID,用户名,密码,联系方式,地址,钱包余额,用户状态";
@@ -252,6 +301,21 @@ void write_recharge(){
   for(int i = 0; i < len; i++){
     ofs << endl
         << store_recharge[i].user_id << "," << store_recharge[i].money;
+  }
+  ofs.close();
+}
+
+void write_cart(){
+  ofstream ofs("/Users/huwenjing/project01/shoppingCart.txt");
+  ofs<< "用户ID,商品ID,商品数量,商品状态";
+  int len = store_cart.size();
+  for(int i = 0; i < len; i++){
+    int cart_len = store_cart[i].shoppingCart.size();
+    for(int j = 0; j < cart_len; j++){
+      ofs << endl
+          << store_cart[i].user_id << "," << store_cart[i].shoppingCart[j].good_id  << ","
+          << store_cart[i].shoppingCart[j].stock << "," << store_cart[i].shoppingCart[j].condition;
+    }
   }
   ofs.close();
 }

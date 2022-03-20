@@ -3,6 +3,8 @@
 #include <string>
 #include <string_view>
 #include <iomanip>
+#include "shopping.h"
+#include "chatting.h"
 #include "admin.h"
 #include "buyer.h"
 #include "data.h"
@@ -17,6 +19,7 @@ vector<every_user> store_users;
 vector<commodity> store_goods;
 vector<order> store_orders;
 vector<deposit> store_recharge;
+vector<cart> store_cart;
 
 void main_manu(){
   cout << "==========================================" << endl;
@@ -99,6 +102,47 @@ void register_module(){
   user.register_account(user);
 }
 
+int cart_mod(Buyer &buyer, User &user){
+  int opt=0;
+  Cart cart;
+  while(true){
+    cart.cart_menu();
+    cin >> opt;
+    while(!cin || getchar()!='\n'){
+      cout <<"输入不合法！请重新输入：";
+      cin.clear();
+      while(getchar()!='\n');
+      cin >> opt;
+    }
+
+    switch (opt) {
+      case 1:{
+        cart.see_cart(user);
+        break;
+      }
+      case 2:{
+        cart.add_cart(user);
+        break;
+      }
+      case 3:{
+        cart.rm_cart(user);
+        break;
+      }
+      case 4:{
+        cart.buy_all(user, buyer);
+        break;
+      }
+      case 5:{
+        return 0;
+      }
+      default:{
+        cout << "请输入1-5之间的整数！" << endl;
+        break;
+      }
+    }
+  }
+}
+
 int buyer_mod(Buyer &buyer, User &user){
   int opt=0;
   while(true){
@@ -133,6 +177,10 @@ int buyer_mod(Buyer &buyer, User &user){
         break;
       }
       case 6:{
+        cart_mod(buyer, user);
+        break;
+      }
+      case 7:{
         return 0;
       }
       default: {

@@ -13,6 +13,7 @@ extern vector<every_user> store_users;
 extern vector<commodity> store_goods;
 extern vector<order> store_orders;
 extern vector<deposit> store_recharge;
+extern vector<cart> store_cart;
 
 using namespace std;
 
@@ -25,11 +26,13 @@ void read_users();
 void read_goods();
 void read_orders();
 void read_recharge();
+void read_cart();
 
 //写入
 void write_users();
 void write_goods();
 void write_orders();
 void write_recharge();
+void write_cart();
 
 #endif //MAIN_CPP__FILE_H_

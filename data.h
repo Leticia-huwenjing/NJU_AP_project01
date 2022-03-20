@@ -6,6 +6,7 @@
 #define PROJECT01__DATA_H_
 
 #include <iostream>
+#include <vector>
 using namespace std;
 
 struct commodity{
@@ -42,6 +43,11 @@ struct order{
 struct deposit{
   string user_id;
   string money;
+};
+
+struct cart{
+  string user_id;
+  vector<commodity> shoppingCart;
 };
 
 #endif //PROJECT01__DATA_H_

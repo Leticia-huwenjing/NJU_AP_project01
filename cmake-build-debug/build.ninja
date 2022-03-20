@@ -132,6 +132,18 @@ build CMakeFiles/project01.dir/utfwidth.cpp.o: CXX_COMPILER__project01_Debug /Us
   OBJECT_DIR = CMakeFiles/project01.dir
   OBJECT_FILE_DIR = CMakeFiles/project01.dir
 
+build CMakeFiles/project01.dir/shopping.cpp.o: CXX_COMPILER__project01_Debug /Users/huwenjing/project01/shopping.cpp || cmake_object_order_depends_target_project01
+  DEP_FILE = CMakeFiles/project01.dir/shopping.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.5 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/project01.dir
+  OBJECT_FILE_DIR = CMakeFiles/project01.dir
+
+build CMakeFiles/project01.dir/chatting.cpp.o: CXX_COMPILER__project01_Debug /Users/huwenjing/project01/chatting.cpp || cmake_object_order_depends_target_project01
+  DEP_FILE = CMakeFiles/project01.dir/chatting.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.5 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/project01.dir
+  OBJECT_FILE_DIR = CMakeFiles/project01.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target project01
@@ -140,7 +152,7 @@ build CMakeFiles/project01.dir/utfwidth.cpp.o: CXX_COMPILER__project01_Debug /Us
 #############################################
 # Link the executable project01
 
-build project01: CXX_EXECUTABLE_LINKER__project01_Debug CMakeFiles/project01.dir/main.cpp.o CMakeFiles/project01.dir/seller.cpp.o CMakeFiles/project01.dir/buyer.cpp.o CMakeFiles/project01.dir/admin.cpp.o CMakeFiles/project01.dir/user.cpp.o CMakeFiles/project01.dir/sql.cpp.o CMakeFiles/project01.dir/calculator.cpp.o CMakeFiles/project01.dir/file.cpp.o CMakeFiles/project01.dir/mk_wcwidth.c.o CMakeFiles/project01.dir/utfwidth.cpp.o
+build project01: CXX_EXECUTABLE_LINKER__project01_Debug CMakeFiles/project01.dir/main.cpp.o CMakeFiles/project01.dir/seller.cpp.o CMakeFiles/project01.dir/buyer.cpp.o CMakeFiles/project01.dir/admin.cpp.o CMakeFiles/project01.dir/user.cpp.o CMakeFiles/project01.dir/sql.cpp.o CMakeFiles/project01.dir/calculator.cpp.o CMakeFiles/project01.dir/file.cpp.o CMakeFiles/project01.dir/mk_wcwidth.c.o CMakeFiles/project01.dir/utfwidth.cpp.o CMakeFiles/project01.dir/shopping.cpp.o CMakeFiles/project01.dir/chatting.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.5
   OBJECT_DIR = CMakeFiles/project01.dir
   POST_BUILD = :

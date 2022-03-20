@@ -312,6 +312,18 @@ void update_good_admin(string instruction) {
   }
   write_goods();
 
+  //更新购物车中的商品信息
+  int cart_len = store_cart.size();
+  for(int i = 0; i < cart_len; i++){
+    int this_len = store_cart[i].shoppingCart.size();
+    for(int j = 0; j < this_len; j++){
+      if(store_cart[i].shoppingCart[j].good_id == this_good_id){
+        store_cart[i].shoppingCart[j].condition = "已下架";
+      }
+    }
+  }
+  write_cart();
+
   ofstream ofs("/Users/huwenjing/project01/commands.txt",ios::app);
   ofs << sql_date() << instruction << endl;
   ofs.close();
@@ -638,6 +650,18 @@ void update_buyer(string instruction, User& user){ //两种指令，一种下架
       }
     }
     write_goods();
+
+    //更新购物车中的商品信息
+    int cart_len = store_cart.size();
+    for(int i = 0; i < cart_len; i++){
+      int this_len = store_cart[i].shoppingCart.size();
+      for(int j = 0; j < this_len; j++){
+        if(store_cart[i].shoppingCart[j].good_id == this_good_id){
+          store_cart[i].shoppingCart[j].condition = "已下架";
+        }
+      }
+    }
+    write_cart();
   }
   else{ //更新商品数量
     int p1 = instruction.find('=');
@@ -823,6 +847,18 @@ void update_seller(string instruction, User& user){
       }
     }
     write_goods();
+
+    //更新购物车中的商品信息
+    int cart_len = store_cart.size();
+    for(int i = 0; i < cart_len; i++){
+      int this_len = store_cart[i].shoppingCart.size();
+      for(int j = 0; j < this_len; j++){
+        if(store_cart[i].shoppingCart[j].good_id == this_good_id){
+          store_cart[i].shoppingCart[j].condition = "已下架";
+        }
+      }
+    }
+    write_cart();
   }
   else{
     if(instruction.find("价格") != string::npos){
