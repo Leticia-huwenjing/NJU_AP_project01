@@ -122,7 +122,28 @@ void Cart::add_cart(User &user) {
         for(int m = 0; m < len; m++){
           if(store_cart[m].user_id == user.id){
             is_have_cart = true;
-            store_cart[m].shoppingCart.push_back(this_good);
+            int cart_len = store_cart[m].shoppingCart.size();
+            bool is_haven = false;
+            for(int n = 0; n < cart_len; n++){
+              if(store_cart[m].shoppingCart[n].good_id == this_good_id){
+                is_haven = true;
+                int old_amount = stoi(store_cart[m].shoppingCart[n].stock);
+                int add_amount = stoi(this_good_amount);
+                if(old_amount+add_amount > this_stock){
+                  cout << "***********" << endl;
+                  cout << "库存量不足！" << endl;
+                  cout << "***********" << endl;
+                  return;
+                }
+                else{
+                  store_cart[m].shoppingCart[n].stock = to_string(old_amount+add_amount);
+                }
+                break;
+              }
+            }
+            if(!is_haven) {
+              store_cart[m].shoppingCart.push_back(this_good);
+            }
             cout << "加入成功！" << endl;
             cout << "******************************" << endl;
             cout << "商品ID：" << this_good_id << endl;
