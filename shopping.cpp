@@ -5,9 +5,9 @@
 #include "shopping.h"
 
 void Cart::cart_menu() {
-  cout << "===========================================================" << endl;
+  cout << "================================================================" << endl;
   cout << "1.查看商品 2.加入商品 3.移出商品 4.购买全部商品 5.退出我的购物车" << endl;
-  cout << "===========================================================" << endl;
+  cout << "================================================================" << endl;
   cout << endl;
   cout << "请输入操作：";
 }
@@ -17,9 +17,9 @@ void Cart::add_cart(User &user) {
   string this_good_id;
   getline(cin, this_good_id);
   if(this_good_id.find(' ') != string::npos){
-    cout << "***************" << endl;
+    cout << "****************" << endl;
     cout << "您的输入不合法！" << endl;
-    cout << "***************" << endl << endl;
+    cout << "****************" << endl << endl;
     return ;
   }
 
@@ -29,9 +29,9 @@ void Cart::add_cart(User &user) {
   if(this_good_id.size() != 4 || this_good_id[0] != 'M' || !(this_good_id[1] >= '0' && this_good_id[1] <= '9'
       && this_good_id[2] >= '0' && this_good_id[2] <= '9' && this_good_id[3] >= '0' && this_good_id[3] <= '9')){
     res = false;
-    cout << "***************" << endl;
+    cout << "****************" << endl;
     cout << "您的输入不合法！" << endl;
-    cout << "***************" << endl;
+    cout << "****************" << endl;
     return ;
   }
 
@@ -49,18 +49,18 @@ void Cart::add_cart(User &user) {
     }
     if(!is_alive){
       res = false;
-      cout << "*******************" << endl;
+      cout << "********************" << endl;
       cout << "商品不存在或已下架！" << endl;
-      cout << "*******************" << endl;
+      cout << "********************" << endl;
       return ;
     }
   }
 
   if(store_goods[i].seller_id == user.id){
     res = false;
-    cout << "*******************************" << endl;
+    cout << "***********************************" << endl;
     cout << "您不可以将自己发布的商品加入购物车！" << endl;
-    cout << "*******************************" << endl;
+    cout << "***********************************" << endl;
     return ;
   }
   if(res) {
@@ -68,9 +68,9 @@ void Cart::add_cart(User &user) {
     string this_good_amount;
     getline(cin, this_good_amount);
     if (this_good_amount.find(' ') != string::npos) {
-      cout << "***************" << endl;
+      cout << "****************" << endl;
       cout << "您的输入不合法！" << endl;
-      cout << "***************" << endl << endl;
+      cout << "****************" << endl << endl;
       return;
     }
 
@@ -79,9 +79,9 @@ void Cart::add_cart(User &user) {
     for (int j = 0; j < size; j++) {
       if (!(this_good_amount[j] >= '0' && this_good_amount[j] <= '9')) {
         is_amount_valid = false;
-        cout << "***************" << endl;
+        cout << "****************" << endl;
         cout << "您的输入不合法！" << endl;
-        cout << "***************" << endl;
+        cout << "****************" << endl;
         return;
       }
     }
@@ -95,9 +95,9 @@ void Cart::add_cart(User &user) {
       }
       if (all_zero) {
         is_amount_valid = false;
-        cout << "***************" << endl;
+        cout << "****************" << endl;
         cout << "您的输入不合法！" << endl;
-        cout << "***************" << endl;
+        cout << "****************" << endl;
         return;
       }
     }
@@ -107,9 +107,9 @@ void Cart::add_cart(User &user) {
       int this_stock = stoi(store_goods[i].stock);
 
       if (amount > this_stock) {
-        cout << "***********" << endl;
+        cout << "************" << endl;
         cout << "库存量不足！" << endl;
-        cout << "***********" << endl;
+        cout << "************" << endl;
         return;
       }
       else{
@@ -130,9 +130,9 @@ void Cart::add_cart(User &user) {
                 int old_amount = stoi(store_cart[m].shoppingCart[n].stock);
                 int add_amount = stoi(this_good_amount);
                 if(old_amount+add_amount > this_stock){
-                  cout << "***********" << endl;
+                  cout << "************" << endl;
                   cout << "库存量不足！" << endl;
-                  cout << "***********" << endl;
+                  cout << "************" << endl;
                   return;
                 }
                 else{
@@ -181,9 +181,9 @@ void Cart::rm_cart(User &user) {
   getline(cin, this_good_id);
 
   if(this_good_id.find(' ') != string::npos){
-    cout << "***************" << endl;
+    cout << "****************" << endl;
     cout << "您的输入不合法！" << endl;
-    cout << "***************" << endl << endl;
+    cout << "****************" << endl << endl;
     return ;
   }
 
@@ -194,9 +194,9 @@ void Cart::rm_cart(User &user) {
   if(this_good_id.size() != 4 || this_good_id[0] != 'M' || !(this_good_id[1] >= '0' && this_good_id[1] <= '9'
       && this_good_id[2] >= '0' && this_good_id[2] <= '9' && this_good_id[3] >= '0' && this_good_id[3] <= '9')){
     res = false;
-    cout << "***************" << endl;
+    cout << "****************" << endl;
     cout << "您的输入不合法！" << endl;
-    cout << "***************" << endl;
+    cout << "****************" << endl;
   }
 
   //处理商品id不存在或不在购物车中

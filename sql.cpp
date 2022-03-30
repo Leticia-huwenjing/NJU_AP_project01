@@ -291,9 +291,9 @@ void search_admin(string instruction) {
     cout << endl;
   }
   else{
-    cout << "******************************" << endl;
+    cout << "***********************************" << endl;
     cout << "没有找到您想要的商品！返回初始界面" << endl;
-    cout << "******************************" << endl;
+    cout << "***********************************" << endl;
   }
   ofstream ofs("/Users/huwenjing/project01/commands.txt",ios::app);
   ofs << sql_date() << instruction << endl;
@@ -404,9 +404,9 @@ void select_buyer(string instruction, User& user){
       cout << endl;
     }
     else{
-      cout << "********************************************" << endl;
+      cout << "***************************************************" << endl;
       cout << "当前没有销售中商品哦！您可以切换为卖家模式发布商品！" << endl;
-      cout << "********************************************" << endl;
+      cout << "***************************************************" << endl;
     }
     ofstream ofs("/Users/huwenjing/project01/commands.txt",ios::app);
     ofs << sql_date() << instruction << endl;
@@ -449,9 +449,9 @@ void select_buyer(string instruction, User& user){
       cout << endl;
     }
     else{
-      cout << "********************************" << endl;
+      cout << "************************************" << endl;
       cout << "您还没有订单哦！快去购买一些商品吧！" << endl;
-      cout << "********************************" << endl;
+      cout << "************************************" << endl;
     }
     ofstream ofs("/Users/huwenjing/project01/commands.txt",ios::app);
     ofs << sql_date() << instruction << endl;
@@ -504,15 +504,15 @@ void search_buyer(string instruction) {
         cout << endl;
       }
       else{
-        cout << "******************************" << endl;
+        cout << "**********************************" << endl;
         cout << "您想要的商品已下架！返回初始界面" << endl;
-        cout << "******************************" << endl;
+        cout << "**********************************" << endl;
       }
     }
     else{
-      cout << "******************************" << endl;
+      cout << "**********************************" << endl;
       cout << "没有找到您想要的商品！返回初始界面" << endl;
-      cout << "******************************" << endl;
+      cout << "**********************************" << endl;
     }
   }
   else{ //查看商品详情
@@ -545,15 +545,15 @@ void search_buyer(string instruction) {
         cout << "*********************************" << endl;
       }
       else{
-        cout << "****************************" << endl;
+        cout << "*******************************" << endl;
         cout << "该商品不在销售中！返回初始界面" << endl;
-        cout << "****************************" << endl;
+        cout << "*******************************" << endl;
       }
     }
     else{
-      cout << "************************" << endl;
+      cout << "***************************" << endl;
       cout << "不存在该商品！返回初始界面" << endl;
-      cout << "************************" << endl;
+      cout << "***************************" << endl;
     }
   }
   ofstream ofs("/Users/huwenjing/project01/commands.txt",ios::app);
@@ -725,9 +725,9 @@ void select_seller(string instruction, User& user) {
       cout << endl;
     }
     else{
-      cout << "**********************************" << endl;
+      cout << "**************************************" << endl;
       cout << "您还没有发布过商品哦！快去发布商品吧！" << endl;
-      cout << "**********************************" << endl;
+      cout << "**************************************" << endl;
     }
     ofstream ofs("/Users/huwenjing/project01/commands.txt",ios::app);
     ofs << sql_date() << instruction << endl;
@@ -770,9 +770,9 @@ void select_seller(string instruction, User& user) {
       cout << endl;
     }
     else{
-      cout << "*********************" << endl;
+      cout << "************************" << endl;
       cout << "您还没有历史出售订单哦！" << endl;
-      cout << "*********************" << endl;
+      cout << "************************" << endl;
     }
     ofstream ofs("/Users/huwenjing/project01/commands.txt",ios::app);
     ofs << sql_date() << instruction << endl;

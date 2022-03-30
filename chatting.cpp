@@ -4,9 +4,9 @@
 
 #include "chatting.h"
 void Chatting::chat_menu(){
-  cout << "================================================" << endl;
+  cout << "=======================================================" << endl;
   cout << "1.用户留言 2.查看新留言 3.查看留言记录 4.退出留言系统" << endl;
-  cout << "================================================" << endl;
+  cout << "=======================================================" << endl;
   cout << endl;
   cout << "请输入操作：";
 }
@@ -27,9 +27,9 @@ void Chatting::add_message(User &user){
     }
   }
   if(!is_alive){
-    cout << "***************" << endl;
+    cout << "******************" << endl;
     cout << "您输入的用户非法！" << endl;
-    cout << "***************" << endl;
+    cout << "******************" << endl;
   }
   else{
     cout << "请输入您的留言：";
@@ -61,9 +61,9 @@ void Chatting::see_new_message(User &user){
     }
   }
   if(!is_message){
-    cout << "********************" << endl;
+    cout << "***********************" << endl;
     cout << "您没有尚未查看的新留言！" << endl;
-    cout << "********************" << endl;
+    cout << "***********************" << endl;
   }
   else{
     cout << "您收到了新的留言！" << endl;
@@ -153,9 +153,9 @@ void Chatting::see_message_history(User &user){
       string other_id;
       getline(cin, other_id);
       if(other_id.find(' ') != string::npos){
-        cout << "***************" << endl;
+        cout << "****************" << endl;
         cout << "您的输入不合法！" << endl;
-        cout << "***************" << endl << endl;
+        cout << "****************" << endl << endl;
         return ;
       }
 
@@ -165,9 +165,9 @@ void Chatting::see_message_history(User &user){
       if(other_id.size() != 4 || other_id[0] != 'U' || !(other_id[1] >= '0' && other_id[1] <= '9'
           && other_id[2] >= '0' && other_id[2] <= '9' && other_id[3] >= '0' && other_id[3] <= '9')){
         res = false;
-        cout << "***************" << endl;
+        cout << "****************" << endl;
         cout << "您的输入不合法！" << endl;
-        cout << "***************" << endl;
+        cout << "****************" << endl;
       }
 
         //处理用户不存在
@@ -182,9 +182,9 @@ void Chatting::see_message_history(User &user){
         }
         if(!is_alive){
           res = false;
-          cout << "**********" << endl;
+          cout << "************" << endl;
           cout << "用户不存在！" << endl;
-          cout << "**********" << endl;
+          cout << "************" << endl;
         }
       }
 

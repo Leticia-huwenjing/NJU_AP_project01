@@ -4,9 +4,9 @@
 
 #include "buyer.h"
 void Buyer::menu() {
-  cout << "==========================================================================================" << endl;
+  cout << "======================================================================================================" << endl;
   cout << "1.查看商品列表 2.购买商品 3.搜索商品 4.查看历史订单 5.查看商品详细信息 6.我的购物车 7.返回用户主界面" << endl;
-  cout << "==========================================================================================" << endl;
+  cout << "======================================================================================================" << endl;
   cout << endl;
   cout << "请输入操作：";
 }
@@ -25,7 +25,7 @@ void Buyer::search_good(User &user) {
   getline(cin, this_name);
   if(this_name.find(' ') != string::npos){
     cout << "***************" << endl;
-    cout << "您的输入不合法！";
+    cout << "您的输入不合法！" << endl;
     cout << "***************" << endl << endl;
     return ;
   }
@@ -46,7 +46,7 @@ void Buyer::buy_good(User &user) {
   getline(cin, this_good_id);
   if(this_good_id.find(' ') != string::npos){
     cout << "***************" << endl;
-    cout << "您的输入不合法！";
+    cout << "您的输入不合法！" << endl;
     cout << "***************" << endl << endl;
     return ;
   }
@@ -58,7 +58,7 @@ void Buyer::buy_good(User &user) {
       && this_good_id[2] >= '0' && this_good_id[2] <= '9' && this_good_id[3] >= '0' && this_good_id[3] <= '9')){
     res = false;
     cout << "***************" << endl;
-    cout << "您的输入不合法！";
+    cout << "您的输入不合法！" << endl;
     cout << "***************" << endl;
     return ;
   }
@@ -98,7 +98,7 @@ void Buyer::buy_good(User &user) {
     getline(cin, this_good_amount);
     if(this_good_amount.find(' ') != string::npos){
       cout << "***************" << endl;
-      cout << "您的输入不合法！";
+      cout << "您的输入不合法！" << endl;
       cout << "***************" << endl << endl;
       return ;
     }
@@ -241,7 +241,7 @@ void Buyer::good_detail(User &user) {
   getline(cin, this_good_id);
   if(this_good_id.find(' ') != string::npos){
     cout << "***************" << endl;
-    cout << "您的输入不合法！";
+    cout << "您的输入不合法！" << endl;
     cout << "***************" << endl << endl;
     return ;
   }

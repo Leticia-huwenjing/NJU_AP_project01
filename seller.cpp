@@ -4,9 +4,9 @@
 
 #include "seller.h"
 void Seller::menu() {
-  cout << "========================================================================" << endl;
+  cout << "====================================================================================" << endl;
   cout << "1.发布商品 2.查看发布商品 3.修改商品信息 4.下架商品 5.查看历史订单 6.返回用户主界面" << endl;
-  cout << "========================================================================" << endl;
+  cout << "====================================================================================" << endl;
   cout << endl;
   cout << "请输入操作：";
 }
@@ -57,9 +57,9 @@ void Seller::remove_good(User &user) {
 
     if(!is_alive){
       res = false;
-      cout << "******************************" << endl;
+      cout << "***********************************" << endl;
       cout << "商品不存在/已下架/不是您发布的商品" << endl;
-      cout << "******************************" << endl;
+      cout << "***********************************" << endl;
     }
   }
 
@@ -117,9 +117,9 @@ void Seller::sell_good(User &user) {
   cout << "请输入商品名称：";
   getline(cin, this_good_name);
   if(this_good_name.find(' ') != string::npos){
-    cout << "***************" << endl;
+    cout << "****************" << endl;
     cout << "您的输入不合法！" << endl;
-    cout << "***************" << endl << endl;
+    cout << "****************" << endl << endl;
     return ;
   }
 
@@ -127,9 +127,9 @@ void Seller::sell_good(User &user) {
   cout << "请输入商品价格：";
   getline(cin, this_good_price);
   if(this_good_price.find(' ') != string::npos){
-    cout << "***************" << endl;
+    cout << "****************" << endl;
     cout << "您的输入不合法！" << endl;
-    cout << "***************" << endl << endl;
+    cout << "****************" << endl << endl;
     return ;
   }
 
@@ -137,9 +137,9 @@ void Seller::sell_good(User &user) {
   cout << "请输入商品数量：";
   getline(cin, this_good_stock);
   if(this_good_stock.find(' ') != string::npos){
-    cout << "***************" << endl;
+    cout << "****************" << endl;
     cout << "您的输入不合法！" << endl;
-    cout << "***************" << endl << endl;
+    cout << "****************" << endl << endl;
     return ;
   }
 
@@ -147,9 +147,9 @@ void Seller::sell_good(User &user) {
   cout << "请输入商品描述：";
   getline(cin, this_good_information);
   if(this_good_information.find(' ') != string::npos){
-    cout << "***************************" << endl;
+    cout << "********************************" << endl;
     cout << "您输入的商品描述中不能含有空格！" << endl;
-    cout << "***************************" << endl << endl;
+    cout << "********************************" << endl << endl;
     return ;
   }
   cout << endl;
@@ -213,9 +213,9 @@ void Seller::sell_good(User &user) {
 
   //如果res合法，则生成指令
   if(!res){
-    cout << "*******************" << endl;
+    cout << "********************" << endl;
     cout << "价格/数量输入不合法！" << endl;
-    cout << "*******************" << endl;
+    cout << "********************" << endl;
   }
   else{
     cout << "请确认发布的商品信息无误！" << endl;
@@ -257,9 +257,9 @@ void Seller::change_good(User &user) {
   string this_good_id;
   getline(cin, this_good_id);
   if(this_good_id.find(' ') != string::npos){
-    cout << "***************" << endl;
+    cout << "****************" << endl;
     cout << "您的输入不合法！" << endl;
-    cout << "***************" << endl << endl;
+    cout << "****************" << endl << endl;
     return ;
   }
 
@@ -269,9 +269,9 @@ void Seller::change_good(User &user) {
   if(this_good_id.size() != 4 || this_good_id[0] != 'M' || !(this_good_id[1] >= '0' && this_good_id[1] <= '9'
       && this_good_id[2] >= '0' && this_good_id[2] <= '9' && this_good_id[3] >= '0' && this_good_id[3] <= '9')){
     id_res = false;
-    cout << "***************" << endl;
+    cout << "****************" << endl;
     cout << "您的输入不合法！" << endl;
-    cout << "***************" << endl;
+    cout << "****************" << endl;
   }
 
   //处理商品id不存在或已下架
@@ -291,9 +291,9 @@ void Seller::change_good(User &user) {
 
     if(!is_alive){
       id_res = false;
-      cout << "******************************" << endl;
+      cout << "***********************************" << endl;
       cout << "商品不存在/已下架/不是您发布的商品" << endl;
-      cout << "******************************" << endl;
+      cout << "***********************************" << endl;
     }
   }
 
@@ -304,9 +304,9 @@ void Seller::change_good(User &user) {
     getline(cin, attribute);
     if(attribute != "1" && attribute != "2"){
       opt_res = false;
-      cout << "**************" << endl;
+      cout << "***************" << endl;
       cout << "您的输入不合法！" << endl;
-      cout << "**************" << endl;
+      cout << "***************" << endl;
     }
     if(opt_res){
       switch (attribute[0]) {
@@ -315,9 +315,9 @@ void Seller::change_good(User &user) {
           string this_good_price;
           getline(cin, this_good_price);
           if(this_good_price.find(' ') != string::npos){
-            cout << "***************" << endl;
+            cout << "****************" << endl;
             cout << "您的输入不合法！" << endl;
-            cout << "***************" << endl << endl;
+            cout << "****************" << endl << endl;
             return ;
           }
 
@@ -358,9 +358,9 @@ void Seller::change_good(User &user) {
           }
 
           if(!res){
-            cout << "***************" << endl;
+            cout << "****************" << endl;
             cout << "您的输入不合法！" << endl;
-            cout << "***************" << endl;
+            cout << "****************" << endl;
           }
           else{
             cout << "请确认修改的信息无误！" << endl;
@@ -400,9 +400,9 @@ void Seller::change_good(User &user) {
           string this_information;
           getline(cin, this_information);
           if(this_information.find(' ') != string::npos){
-            cout << "*************************" << endl;
-            cout << "您输入的商品描述不能含有括号！" << endl;
-            cout << "*************************" << endl << endl;
+            cout << "******************************" << endl;
+            cout << "您输入的商品描述不能含有空格！" << endl;
+            cout << "******************************" << endl << endl;
             return ;
           }
 
